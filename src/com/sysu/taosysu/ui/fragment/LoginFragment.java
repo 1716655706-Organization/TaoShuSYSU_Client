@@ -1,7 +1,7 @@
 package com.sysu.taosysu.ui.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +29,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 		nameEt = (EditText) rootView.findViewById(R.id.input_account);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_password);
 
-		login = (Button) rootView.findViewById(R.id.login);
+		login = (Button) rootView.findViewById(R.id.btn_login);
 		login.setOnClickListener(this);
 		return rootView;
 	}

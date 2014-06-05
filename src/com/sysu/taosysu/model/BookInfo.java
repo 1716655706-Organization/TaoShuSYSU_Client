@@ -9,7 +9,7 @@ import com.sysu.taosysu.R;
 
 public class BookInfo {
 
-	private static final int DEFAULT_ICON = R.drawable.default_book_cover;
+	public static final int DEFAULT_ICON = R.drawable.default_book_cover;
 	private Bitmap bookBitmap;
 	private String uploadUsername;
 	private String createTime;
