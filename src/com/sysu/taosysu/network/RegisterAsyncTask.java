@@ -67,7 +67,7 @@ public class RegisterAsyncTask extends AsyncTask<String, Integer, String>{
 		if (result != null) {
 			try {
 				JSONObject msg = new JSONObject(result);
-				int requestCode = msg.getInt("requestCode");
+				int requestCode = msg.getInt("returnCode");
 				if (requestCode == 1) {
 					int userId = msg.getInt("userId");
 					listener.onRegisterSuccess(userId);

@@ -80,7 +80,7 @@ public class UploadBookAsyncTask extends AsyncTask<String, Integer, String> {
 		if (result != null) {
 			try {
 				JSONObject msg = new JSONObject(result);
-				int requestCode = msg.getInt("requestCode");
+				int requestCode = msg.getInt("returnCode");
 				if (requestCode == 1) {
 					listener.onUploadBookSuccess();
 				} else {

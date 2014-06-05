@@ -70,10 +70,11 @@ public class LoginAsyncTask extends AsyncTask<String, Integer, String> {
 		super.onPostExecute(result);
 		if (result != null) {
 			try {
+				Log.i("json", result);
 				JSONObject msg = new JSONObject(result);
-				int requestCode = msg.getInt("requestCode");
+				int requestCode = msg.getInt("returnCode");
 				if (requestCode == 1) {
-					int userId = msg.getInt("userId");
+					int userId = Integer.parseInt(msg.getString("userId"));
 					listener.onLoginSuccess(userId);
 				} else if (requestCode == -1) {
 					listener.onLoginFail("用户名或密码错误！");
