@@ -22,14 +22,15 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 
 public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
-	
+
 	private int serviceId = 1;
 	private int commandId = 1;
 	private int startBookId;
 	private int size;
 	private OnRequestListener listener;
-	
-	public GetBookListAsyncTask(int startBookId, int size, OnRequestListener listener) {
+
+	public GetBookListAsyncTask(int startBookId, int size,
+			OnRequestListener listener) {
 		this.startBookId = startBookId;
 		this.size = size;
 		this.listener = listener;
@@ -74,11 +75,12 @@ public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
 				int requestCode = msg.getInt("returnCode");
 				if (requestCode == 1) {
 					JSONArray jsonBookList = msg.getJSONArray("bookList");
-					List<Map<String, Object>> bookList = new ArrayList<Map<String,Object>>();
+					List<Map<String, Object>> bookList = new ArrayList<Map<String, Object>>();
 					for (int i = 0; i < jsonBookList.length(); i++) {
 						Map<String, Object> map = new HashMap<String, Object>();
 						JSONObject jsonBook = jsonBookList.getJSONObject(i);
-						map.put("bookId", Integer.parseInt(jsonBook.getString("bookId")));
+						map.put("bookId",
+								Integer.parseInt(jsonBook.getString("bookId")));
 						map.put("bookName", jsonBook.getString("bookName"));
 						map.put("content", jsonBook.getString("content"));
 						map.put("time", jsonBook.getString("time"));
@@ -100,6 +102,7 @@ public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public interface OnRequestListener {
 		void onGetBookListSuccess(List<Map<String, Object>> bookList);
+
 		void onGetBookListFail(String errorMessage);
 	}
 }

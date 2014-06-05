@@ -20,7 +20,10 @@
 		android:layout_alignBaseline="@+id/text_account"
 		android:layout_marginRight="20dp"
 		android:layout_toRightOf="@+id/text_account"
-		android:hint="@string/please_input_account" />
+		android:hint="@string/please_input_account" >
+
+		<requestFocus />
+	</EditText>
 
 	<TextView
 		android:id="@+id/text_pwd"
@@ -49,9 +52,18 @@
 		android:layout_height="wrap_content"
 		android:layout_alignRight="@+id/input_password"
 		android:layout_below="@+id/text_pwd"
+		android:enabled="false"
 		android:paddingLeft="20dp"
 		android:paddingRight="20dp"
 		android:paddingTop="1dp"
 		android:text="@string/login" />
+
+	<include
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:layout_margin="20dp"
+		android:visibility="gone"
+		layout="@layout/action_progress" />
 
 </RelativeLayout>

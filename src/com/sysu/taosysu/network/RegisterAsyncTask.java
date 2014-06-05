@@ -88,7 +88,7 @@ public class RegisterAsyncTask extends AsyncTask<String, Integer, String>{
 		}
 	}
 
-	public interface OnRequestListener {
+	public static interface OnRequestListener {
 		void onRegisterSuccess(int userId);
 		void onRegisterFail(String errorMessage);
 	}
