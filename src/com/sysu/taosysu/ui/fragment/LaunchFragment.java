@@ -33,6 +33,15 @@ public class LaunchFragment extends Fragment {
 			}
 		});
 
+		registerBtn.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				getFragmentManager().beginTransaction()
+						.replace(R.id.launch_container, new RegisterFragment())
+						.addToBackStack("").commit();
+			}
+		});
 		return view;
 	}
 }
