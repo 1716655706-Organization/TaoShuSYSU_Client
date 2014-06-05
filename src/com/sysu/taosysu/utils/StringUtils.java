@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 public class StringUtils {
 
-	public static boolean isEmpty(EditText et) {
+	public static boolean isEmpty(final EditText et) {
 		String content = et.getText().toString();
 		return content.isEmpty();
 	}

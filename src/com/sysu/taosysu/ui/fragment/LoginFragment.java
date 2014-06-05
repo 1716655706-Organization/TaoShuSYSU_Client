@@ -1,7 +1,6 @@
 package com.sysu.taosysu.ui.fragment;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.sysu.taosysu.MainActivity;
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.network.LoginAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
@@ -41,7 +39,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	}
 
 	private boolean checkInfoHasCompleted() {
-		return !(StringUtils.isEmpty(nameEt) || StringUtils.isEmpty(passwordEt));
+		return !(StringUtils.isEmpty(nameEt));
 	}
 
 	@Override

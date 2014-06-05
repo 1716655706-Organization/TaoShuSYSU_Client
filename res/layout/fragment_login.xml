@@ -49,6 +49,7 @@
 		android:layout_height="wrap_content"
 		android:layout_alignRight="@+id/input_password"
 		android:layout_below="@+id/text_pwd"
+		android:enabled="false"
 		android:paddingLeft="20dp"
 		android:paddingRight="20dp"
 		android:paddingTop="1dp"
