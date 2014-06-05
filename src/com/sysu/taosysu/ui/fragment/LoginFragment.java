@@ -1,6 +1,7 @@
 package com.sysu.taosysu.ui.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.sysu.taosysu.MainActivity;
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.network.LoginAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
@@ -22,6 +25,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	Button loginBtn;
 	EditText nameEt;
 	EditText passwordEt;
+	LinearLayout mProgressView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +35,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 		nameEt = (EditText) rootView.findViewById(R.id.input_account);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_password);
+
+		mProgressView = (LinearLayout) rootView
+				.findViewById(R.id.action_progress);
 
 		nameEt.addTextChangedListener(this);
 		passwordEt.addTextChangedListener(this);
@@ -47,15 +54,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 	@Override
 	public void onClick(View v) {
+		mProgressView.setVisibility(View.VISIBLE);
 		NetworkRequest.login(nameEt.getText().toString(), passwordEt.getText()
 				.toString(), this);
-		// startActivity(new Intent(getActivity(), MainActivity.class));
-		// getActivity().finish();
 	}
 
 	@Override
 	public void onLoginSuccess(int userId) {
+//		SharedPreferences preferences = getActivity().getPreferences(
+//				Context.MODE_PRIVATE);
 		Toast.makeText(getActivity(), "" + userId, Toast.LENGTH_LONG).show();
+		mProgressView.setVisibility(View.GONE);
+
+		startActivity(new Intent(getActivity(), MainActivity.class));
+		getActivity().finish();
 	}
 
 	@Override

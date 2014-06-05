@@ -5,7 +5,7 @@
     <color name="deep_green">#669900</color>
     <color name="default_green">#99CC00</color>
     <color name="disable_green">#C5E26D</color>
-    <color name="default_gray">#444444</color>
+    <color name="default_gray">#FFF</color>
     <color name="list_background">#000000</color>
     <color name="list_background_pressed">#000000</color>
 </resources>

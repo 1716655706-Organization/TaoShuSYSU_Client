@@ -78,7 +78,7 @@ public class DrawerAdapter extends BaseAdapter {
 			username = (TextView) convertView.findViewById(R.id.user_name);
 			createTime = (TextView) convertView
 					.findViewById(R.id.user_join_time);
-			username.setText("¿àÐÁÎ¶");
+			username.setText("è‹¦è¾›å‘³");
 			createTime.setText("2014.1.1");
 		}
 		if (getItemViewType(position) == LIST_NORMAL) {
