@@ -1,7 +1,5 @@
 package com.sysu.taosysu.ui.fragment;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -68,8 +66,8 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 
 	@Override
 	public void onClick(View v) {
-		String content = labelEt.getText().toString();
-		List<String> labelList = StringUtils.parseLabelsFromText(content);
-
+//		String content = labelEt.getText().toString();
+//		List<String> labelList = StringUtils.parseLabelsFromText(content);
+		
 	}
 }
