@@ -65,7 +65,7 @@
 	<string name="book_name">书名</string>
 	<string name="add_book_name">添加书名</string>
 	<string name="add_introduce">添加描述</string>
-	<string name="add_label_hint">添加标签，以逗号隔开</string>
+	<string name="add_label_hint">添加标签，以空格隔开</string>
 	<string name="add_introduce_hint">添加书籍描述</string>
 	
 	<string name="quit">退出</string>
