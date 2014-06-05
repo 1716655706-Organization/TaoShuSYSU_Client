@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.ui.adapter.DrawerAdapter;
@@ -30,6 +29,7 @@ public class NavigationDrawerFragment extends Fragment {
 	public static final int POSITION_SEARCH = 3;
 	public static final int POSITION_NOTIFICATION = 4;
 	public static final int POSITION_SETTING = 5;
+	public static final int POSITION_QUIT = 6;
 
 	private NavigationDrawerCallbacks mCallbacks;
 
@@ -195,12 +195,6 @@ public class NavigationDrawerFragment extends Fragment {
 			return true;
 		}
 
-		if (item.getItemId() == R.id.action_example) {
-			Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT)
-					.show();
-			return true;
-		}
-
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -215,14 +209,7 @@ public class NavigationDrawerFragment extends Fragment {
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
 	}
 
-	/**
-	 * Callbacks interface that all activities using this fragment must
-	 * implement.
-	 */
 	public static interface NavigationDrawerCallbacks {
-		/**
-		 * Called when an item in the navigation drawer is selected.
-		 */
 		void onNavigationDrawerItemSelected(int position);
 	}
 }

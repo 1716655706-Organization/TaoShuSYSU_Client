@@ -13,6 +13,7 @@ import com.sysu.taosysu.ui.fragment.BookListFragment;
 import com.sysu.taosysu.ui.fragment.NavigationDrawerFragment;
 import com.sysu.taosysu.ui.fragment.NotificationFragment;
 import com.sysu.taosysu.ui.fragment.PublishBookFragment;
+import com.sysu.taosysu.ui.fragment.QuitAlertDialog;
 import com.sysu.taosysu.ui.fragment.SearchFragment;
 import com.sysu.taosysu.ui.fragment.SettingsFragment;
 
@@ -56,6 +57,9 @@ public class MainActivity extends ActionBarActivity implements
 			break;
 		case NavigationDrawerFragment.POSITION_SETTING:
 			mFragment = new SettingsFragment();
+			break;
+		case NavigationDrawerFragment.POSITION_QUIT:
+			mFragment = new QuitAlertDialog();
 			break;
 		default:
 			break;
