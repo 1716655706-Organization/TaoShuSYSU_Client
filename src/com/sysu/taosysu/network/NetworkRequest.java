@@ -25,7 +25,9 @@ public class NetworkRequest {
 				.execute(SERVER_URI);
 	}
 
-	public static void getBookList(int startBookId, int size, GetBookListAsyncTask.OnRequestListener listener) {
-		new GetBookListAsyncTask(startBookId, size, listener).execute(SERVER_URI);
+	public static void getBookList(int startBookId, int size,
+			GetBookListAsyncTask.OnRequestListener listener) {
+		new GetBookListAsyncTask(startBookId, size, listener)
+				.execute(SERVER_URI);
 	}
 }
