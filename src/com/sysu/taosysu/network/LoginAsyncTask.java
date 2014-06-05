@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class LoginAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -48,6 +49,7 @@ public class LoginAsyncTask extends AsyncTask<String, Integer, String> {
 			request.setEntity(new UrlEncodedFormEntity(nameValuePair,
 					HTTP.UTF_8));
 			response = NetworkRequest.CLIENT.execute(request);
+			Log.i("CODE", response.getStatusLine().getStatusCode() + "");
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
 			}

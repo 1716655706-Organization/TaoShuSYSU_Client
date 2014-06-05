@@ -42,25 +42,55 @@ public final class R {
         public static final int navigation_drawer_width=0x7f050002;
     }
     public static final class drawable {
-        public static final int btn_default=0x7f020000;
-        public static final int btn_disable=0x7f020001;
-        public static final int btn_pressed=0x7f020002;
-        public static final int default_book_cover=0x7f020003;
-        public static final int drawer_shadow=0x7f020004;
-        public static final int green_btn_selector=0x7f020005;
-        public static final int ic_action_send_now=0x7f020006;
-        public static final int ic_drawer=0x7f020007;
-        public static final int ic_drawer_bell=0x7f020008;
-        public static final int ic_drawer_home=0x7f020009;
-        public static final int ic_drawer_logout=0x7f02000a;
-        public static final int ic_drawer_new=0x7f02000b;
-        public static final int ic_drawer_search=0x7f02000c;
-        public static final int ic_drawer_settings=0x7f02000d;
-        public static final int ic_launcher=0x7f02000e;
+        public static final int ab_background_textured_taoshusysu=0x7f020000;
+        public static final int ab_bottom_solid_taoshusysu=0x7f020001;
+        public static final int ab_solid_taoshusysu=0x7f020002;
+        public static final int ab_stacked_solid_taoshusysu=0x7f020003;
+        public static final int ab_texture_tile_taoshusysu=0x7f020004;
+        public static final int ab_transparent_taoshusysu=0x7f020005;
+        public static final int btn_cab_done_default_taoshusysu=0x7f020006;
+        public static final int btn_cab_done_focused_taoshusysu=0x7f020007;
+        public static final int btn_cab_done_pressed_taoshusysu=0x7f020008;
+        public static final int btn_cab_done_taoshusysu=0x7f020009;
+        public static final int btn_default=0x7f02000a;
+        public static final int btn_disable=0x7f02000b;
+        public static final int btn_pressed=0x7f02000c;
+        public static final int cab_background_bottom_taoshusysu=0x7f02000d;
+        public static final int cab_background_top_taoshusysu=0x7f02000e;
+        public static final int default_book_cover=0x7f02000f;
+        public static final int drawer_shadow=0x7f020010;
+        public static final int green_btn_selector=0x7f020011;
+        public static final int ic_action_send_now=0x7f020012;
+        public static final int ic_drawer=0x7f020013;
+        public static final int ic_drawer_bell=0x7f020014;
+        public static final int ic_drawer_home=0x7f020015;
+        public static final int ic_drawer_logout=0x7f020016;
+        public static final int ic_drawer_new=0x7f020017;
+        public static final int ic_drawer_search=0x7f020018;
+        public static final int ic_drawer_settings=0x7f020019;
+        public static final int ic_launcher=0x7f02001a;
+        public static final int list_focused_taoshusysu=0x7f02001b;
+        public static final int list_pressed_taoshusysu=0x7f02001c;
+        public static final int menu_dropdown_panel_taoshusysu=0x7f02001d;
+        public static final int progress_bg_taoshusysu=0x7f02001e;
+        public static final int progress_horizontal_taoshusysu=0x7f02001f;
+        public static final int progress_primary_taoshusysu=0x7f020020;
+        public static final int progress_secondary_taoshusysu=0x7f020021;
+        public static final int selectable_background_taoshusysu=0x7f020022;
+        public static final int spinner_ab_default_taoshusysu=0x7f020023;
+        public static final int spinner_ab_disabled_taoshusysu=0x7f020024;
+        public static final int spinner_ab_focused_taoshusysu=0x7f020025;
+        public static final int spinner_ab_pressed_taoshusysu=0x7f020026;
+        public static final int spinner_background_ab_taoshusysu=0x7f020027;
+        public static final int tab_indicator_ab_taoshusysu=0x7f020028;
+        public static final int tab_selected_focused_taoshusysu=0x7f020029;
+        public static final int tab_selected_pressed_taoshusysu=0x7f02002a;
+        public static final int tab_selected_taoshusysu=0x7f02002b;
+        public static final int tab_unselected_focused_taoshusysu=0x7f02002c;
+        public static final int tab_unselected_pressed_taoshusysu=0x7f02002d;
+        public static final int tab_unselected_taoshusysu=0x7f02002e;
     }
     public static final class id {
-        public static final int action_example=0x7f0a003d;
-        public static final int action_forgot_password=0x7f0a003c;
         public static final int action_search=0x7f0a0002;
         public static final int action_settings=0x7f0a003b;
         public static final int add_book_name=0x7f0a0029;
@@ -143,8 +173,7 @@ public final class R {
     }
     public static final class menu {
         public static final int global=0x7f090000;
-        public static final int login=0x7f090001;
-        public static final int main=0x7f090002;
+        public static final int main=0x7f090001;
     }
     public static final class string {
         public static final int account=0x7f06000a;
@@ -209,6 +238,10 @@ public final class R {
         public static final int username_cannot_be_empty=0x7f060012;
     }
     public static final class style {
+        public static final int ActionBar_Solid_Taoshusysu=0x7f080005;
+        public static final int ActionBar_Transparent_Taoshusysu=0x7f080006;
+        public static final int ActionBarTabStyle_Taoshusysu=0x7f080009;
+        public static final int ActionButton_CloseMode_Taoshusysu=0x7f08000c;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -237,7 +270,15 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int DropDownListView_Taoshusysu=0x7f080008;
+        public static final int DropDownNav_Taoshusysu=0x7f08000a;
         public static final int LoginFormContainer=0x7f080002;
+        public static final int PopupMenu_Taoshusysu=0x7f080007;
+        public static final int ProgressBar_Taoshusysu=0x7f08000b;
+        public static final int Theme_Taoshusysu=0x7f080004;
+        /**  this style is only referenced in a Light.DarkActionBar based theme 
+         */
+        public static final int Theme_Taoshusysu_Widget=0x7f08000d;
         public static final int green_button=0x7f080003;
     }
 }
