@@ -7,7 +7,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class NetworkRequest {
 	
 	public static HttpClient CLIENT = new DefaultHttpClient();
-	private static String SERVER_URI = "http://192.168.1.1/TaoshuSYSU/server.php";
+	private static String SERVER_URI = "http://115.28.223.78/TaoShuSYSU/server.php";
 	
 	public static void register(String userName, String password, RegisterAsyncTask.OnRequestListener listener) {
 		new RegisterAsyncTask(userName, password, listener).execute(SERVER_URI);
