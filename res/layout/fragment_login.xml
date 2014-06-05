@@ -14,7 +14,7 @@
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<EditText
-		android:id="@+id/account_input"
+		android:id="@+id/input_account"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignBaseline="@+id/text_account"
@@ -33,7 +33,7 @@
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<EditText
-		android:id="@+id/password_input"
+		android:id="@+id/input_password"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignBaseline="@id/text_pwd"
@@ -43,11 +43,11 @@
 		android:inputType="textPassword" />
 
 	<Button
-		android:id="@+id/login"
+		android:id="@+id/btn_login"
 		style="@style/green_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignRight="@+id/password_input"
+		android:layout_alignRight="@+id/input_password"
 		android:layout_below="@+id/text_pwd"
 		android:paddingLeft="20dp"
 		android:paddingRight="20dp"
