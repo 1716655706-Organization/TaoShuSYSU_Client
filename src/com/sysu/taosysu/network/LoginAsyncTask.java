@@ -16,23 +16,23 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
 import android.os.AsyncTask;
 
-public class LoginAsyncTask extends AsyncTask<String, Integer, String>{
-	
+public class LoginAsyncTask extends AsyncTask<String, Integer, String> {
+
 	private int serviceId = 0;
 	private int commandId = 1;
 	private String userName;
 	private String password;
 	private OnRequestListener listener;
-	
-	public LoginAsyncTask(String userName, String password, OnRequestListener listener) {
+
+	public LoginAsyncTask(String userName, String password,
+			OnRequestListener listener) {
 		this.userName = userName;
 		this.password = password;
 		this.listener = listener;
 	}
-	
+
 	@Override
 	protected String doInBackground(String... params) {
 		HttpPost request = new HttpPost(params[0]);
@@ -45,7 +45,8 @@ public class LoginAsyncTask extends AsyncTask<String, Integer, String>{
 			msg.put("userName", userName);
 			msg.put("password", password);
 			nameValuePair.add(new BasicNameValuePair("msg", msg.toString()));
-			request.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
+			request.setEntity(new UrlEncodedFormEntity(nameValuePair,
+					HTTP.UTF_8));
 			response = NetworkRequest.CLIENT.execute(request);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
@@ -72,25 +73,23 @@ public class LoginAsyncTask extends AsyncTask<String, Integer, String>{
 				if (requestCode == 1) {
 					int userId = msg.getInt("userId");
 					listener.onLoginSuccess(userId);
-				}
-				else if (requestCode == -1) {
+				} else if (requestCode == -1) {
 					listener.onLoginFail("用户名或密码错误！");
-				}
-				else {
+				} else {
 					listener.onLoginFail("登录失败！");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				listener.onLoginFail("返回错误！");
 			}
-		}
-		else {
+		} else {
 			listener.onLoginFail("网络连接错误！");
 		}
 	}
 
 	public interface OnRequestListener {
 		void onLoginSuccess(int userId);
+
 		void onLoginFail(String errorMessage);
 	}
 }

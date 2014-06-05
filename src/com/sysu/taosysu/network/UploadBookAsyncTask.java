@@ -1,6 +1,5 @@
 package com.sysu.taosysu.network;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
-public class UploadBookAsyncTask extends AsyncTask<String, Integer, String>{
-	
+public class UploadBookAsyncTask extends AsyncTask<String, Integer, String> {
+
 	private int serviceId = 1;
 	private int commandId = 0;
 	private int userId;
@@ -29,8 +28,9 @@ public class UploadBookAsyncTask extends AsyncTask<String, Integer, String>{
 	private String content;
 	private String[] labels;
 	private OnRequestListener listener;
-	
-	public UploadBookAsyncTask(int userId, String bookName, String content, String[] label, OnRequestListener listener) {
+
+	public UploadBookAsyncTask(int userId, String bookName, String content,
+			String[] label, OnRequestListener listener) {
 		this.userId = userId;
 		this.bookName = bookName;
 		this.content = content;
@@ -52,11 +52,12 @@ public class UploadBookAsyncTask extends AsyncTask<String, Integer, String>{
 			msg.put("content", content);
 			JSONArray labelArray = new JSONArray();
 			for (int i = 0; i < labels.length; i++) {
-				labelArray.put(labels[i]);		
+				labelArray.put(labels[i]);
 			}
 			msg.put("labelArr", labelArray);
 			nameValuePair.add(new BasicNameValuePair("msg", msg.toString()));
-			request.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
+			request.setEntity(new UrlEncodedFormEntity(nameValuePair,
+					HTTP.UTF_8));
 			response = NetworkRequest.CLIENT.execute(request);
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
@@ -82,22 +83,21 @@ public class UploadBookAsyncTask extends AsyncTask<String, Integer, String>{
 				int requestCode = msg.getInt("requestCode");
 				if (requestCode == 1) {
 					listener.onUploadBookSuccess();
-				}
-				else {
+				} else {
 					listener.onUploadBookFail("上传失败！");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				listener.onUploadBookFail("返回错误！");
 			}
-		}
-		else {
+		} else {
 			listener.onUploadBookFail("网络连接错误！");
 		}
 	}
 
 	public interface OnRequestListener {
 		void onUploadBookSuccess();
+
 		void onUploadBookFail(String errorMessage);
 	}
 
