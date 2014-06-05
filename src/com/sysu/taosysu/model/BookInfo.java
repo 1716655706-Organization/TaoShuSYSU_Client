@@ -11,19 +11,19 @@ public class BookInfo {
 
 	public static final int DEFAULT_ICON = R.drawable.default_book_cover;
 	private Bitmap bookBitmap;
-	private String uploadUsername;
+	private String uploadUserId;
+	private String bookId;
+	private String bookPicPath;
 	private String createTime;
-	private String simpleIntroduce;
+	private String content;
 	private String bookname;
 
-	public static BookInfo parse(List<Map<String, Object>> mData) {
+	public static List<BookInfo> parseList(List<Map<String, Object>> mData) {
+		
 		return null;
 	}
 
 	public Bitmap getBookBitmap() {
-		if (bookBitmap == null) {
-
-		}
 		return bookBitmap;
 	}
 
@@ -31,12 +31,28 @@ public class BookInfo {
 		this.bookBitmap = bookBitmap;
 	}
 
-	public String getUploadUsername() {
-		return uploadUsername;
+	public String getUploadUserId() {
+		return uploadUserId;
 	}
 
-	public void setUploadUsername(String uploadUsername) {
-		this.uploadUsername = uploadUsername;
+	public void setUploadUserId(String uploadUserId) {
+		this.uploadUserId = uploadUserId;
+	}
+
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
+
+	public String getBookPicPath() {
+		return bookPicPath;
+	}
+
+	public void setBookPicPath(String bookPicPath) {
+		this.bookPicPath = bookPicPath;
 	}
 
 	public String getCreateTime() {
@@ -47,12 +63,12 @@ public class BookInfo {
 		this.createTime = createTime;
 	}
 
-	public String getSimpleIntroduce() {
-		return simpleIntroduce;
+	public String getContent() {
+		return content;
 	}
 
-	public void setSimpleIntroduce(String simpleIntroduce) {
-		this.simpleIntroduce = simpleIntroduce;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getBookname() {
