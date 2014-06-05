@@ -32,6 +32,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 		nameEt = (EditText) rootView.findViewById(R.id.input_account);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_password);
 
+		nameEt.addTextChangedListener(this);
+		passwordEt.addTextChangedListener(this);
+
 		loginBtn = (Button) rootView.findViewById(R.id.btn_login);
 		loginBtn.setOnClickListener(this);
 
@@ -39,7 +42,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	}
 
 	private boolean checkInfoHasCompleted() {
-		return !(StringUtils.isEmpty(nameEt));
+		return !(StringUtils.isEmpty(nameEt) || StringUtils.isEmpty(passwordEt));
 	}
 
 	@Override

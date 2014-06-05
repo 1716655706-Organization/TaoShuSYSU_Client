@@ -20,7 +20,10 @@
 		android:layout_alignBaseline="@+id/text_account"
 		android:layout_marginRight="20dp"
 		android:layout_toRightOf="@+id/text_account"
-		android:hint="@string/please_input_account" />
+		android:hint="@string/please_input_account" >
+
+		<requestFocus />
+	</EditText>
 
 	<TextView
 		android:id="@+id/text_pwd"
