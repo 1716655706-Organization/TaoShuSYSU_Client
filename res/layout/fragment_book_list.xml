@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:divider="#33ccff"
-	android:dividerHeight="2dp"
+	android:dividerHeight="1dp"
 	tools:listitem="@layout/listitem_bookinfo" >
 
 </ListView>

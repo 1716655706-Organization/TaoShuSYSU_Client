@@ -9,5 +9,5 @@
 		android:layout_height="@dimen/default_action_height"
 		android:layout_margin="5dp"
 		layout="@layout/action_search" />
-
+	
 </LinearLayout>

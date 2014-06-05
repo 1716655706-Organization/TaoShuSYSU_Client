@@ -5,23 +5,22 @@
 	android:orientation="vertical" >
 
 	<TextView
-		android:id="@+id/text_email"
+		android:id="@+id/text_username"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_above="@+id/text_pwd"
 		android:layout_alignLeft="@+id/text_pwd_confirm"
-		android:text="@string/email"
+		android:text="@string/username"
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<EditText
-		android:id="@+id/mail_input"
+		android:id="@+id/input_user_name"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_alignBaseline="@+id/text_email"
-		android:layout_alignRight="@+id/pwd_input"
-		android:layout_toRightOf="@+id/text_email"
-		android:hint="@string/please_input_email"
-		android:inputType="textEmailAddress" />
+		android:layout_alignBaseline="@+id/text_username"
+		android:layout_alignRight="@+id/input_pwd"
+		android:layout_toRightOf="@+id/text_username"
+		android:hint="@string/please_input_username" />
 
 	<TextView
 		android:id="@+id/text_pwd"
@@ -34,11 +33,11 @@
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<EditText
-		android:id="@+id/pwd_input"
+		android:id="@+id/input_pwd"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignBaseline="@+id/text_pwd"
-		android:layout_alignRight="@+id/pwd_confirm_input"
+		android:layout_alignRight="@+id/input_pwd_confirm"
 		android:layout_toRightOf="@+id/text_pwd"
 		android:hint="@string/please_input_password"
 		android:inputType="textEmailAddress" />
@@ -50,26 +49,27 @@
 		android:layout_centerVertical="true"
 		android:layout_marginLeft="20dp"
 		android:layout_marginTop="20dp"
-		android:text="@string/password"
+		android:text="@string/confirm"
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<EditText
-		android:id="@+id/pwd_confirm_input"
+		android:id="@+id/input_pwd_confirm"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignBaseline="@+id/text_pwd_confirm"
 		android:layout_marginRight="20dp"
-		android:layout_toRightOf="@+id/text_email"
+		android:layout_toRightOf="@+id/text_username"
 		android:hint="@string/please_confirm_password"
 		android:inputType="textEmailAddress" />
 
 	<Button
-		android:id="@+id/confirm_register"
+		android:id="@+id/btn_confirm_register"
+		style="@style/green_button"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignRight="@+id/pwd_confirm_input"
+		android:layout_alignRight="@+id/input_pwd_confirm"
 		android:layout_below="@+id/text_pwd_confirm"
-		android:layout_marginTop="10dp"
+		android:enabled="false"
 		android:text="@string/register" />
 
 </RelativeLayout>
