@@ -92,7 +92,6 @@ public class LoginAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public interface OnRequestListener {
 		void onLoginSuccess(int userId);
-
 		void onLoginFail(String errorMessage);
 	}
 }
