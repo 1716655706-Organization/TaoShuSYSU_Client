@@ -3,9 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/fragment_book_list"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:divider="#33ccff"
-	android:dividerHeight="1dp"
+	android:layout_height="wrap_content"
 	tools:listitem="@layout/listitem_bookinfo" >
 
 </ListView>

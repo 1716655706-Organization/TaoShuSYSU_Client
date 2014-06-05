@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sysu.taosysu.MainActivity;
@@ -25,7 +25,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	Button loginBtn;
 	EditText nameEt;
 	EditText passwordEt;
-	LinearLayout mProgressView;
+	RelativeLayout mProgressView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 		nameEt = (EditText) rootView.findViewById(R.id.input_account);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_password);
 
-		mProgressView = (LinearLayout) rootView
+		mProgressView = (RelativeLayout) rootView
 				.findViewById(R.id.action_progress);
 
 		nameEt.addTextChangedListener(this);
@@ -61,8 +61,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 	@Override
 	public void onLoginSuccess(int userId) {
-//		SharedPreferences preferences = getActivity().getPreferences(
-//				Context.MODE_PRIVATE);
+		// TODO save user id
 		Toast.makeText(getActivity(), "" + userId, Toast.LENGTH_LONG).show();
 		mProgressView.setVisibility(View.GONE);
 

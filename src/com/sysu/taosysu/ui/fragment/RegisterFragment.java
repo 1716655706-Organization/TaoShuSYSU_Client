@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sysu.taosysu.MainActivity;
@@ -26,7 +27,7 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 	EditText passwordEt;
 	EditText confirmPwdEt;
 	Button confirmButton;
-	LinearLayout mProgessView;
+	RelativeLayout mProgessView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +39,7 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 		usernameEt = (EditText) rootView.findViewById(R.id.input_user_name);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_pwd);
 		confirmPwdEt = (EditText) rootView.findViewById(R.id.input_pwd_confirm);
-		mProgessView = (LinearLayout) rootView
+		mProgessView = (RelativeLayout) rootView
 				.findViewById(R.id.action_progress);
 
 		usernameEt.addTextChangedListener(this);
@@ -84,16 +85,17 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 					.getText().toString(), this);
 		} else {
 			Toast.makeText(getActivity(),
-					getString(R.string.error_password_different_from_first),
+					getString(R.string.error_password_no_the_same),
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	@Override
 	public void onRegisterSuccess(int userId) {
-		mProgessView.setVisibility(View.GONE);
 		getActivity().startActivity(
 				new Intent(getActivity(), MainActivity.class));
+		Toast.makeText(getActivity(), userId+"", Toast.LENGTH_SHORT).show();
+		mProgessView.setVisibility(View.GONE);
 		getActivity().finish();
 	}
 

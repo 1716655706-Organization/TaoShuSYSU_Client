@@ -16,6 +16,8 @@ public class BookDetailFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.fragment_book_detail, container,
 				false);
+		
+		
 		return view;
 	}
 }

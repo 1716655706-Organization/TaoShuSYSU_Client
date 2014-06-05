@@ -23,8 +23,7 @@ public class BookListFragment extends Fragment {
 				false);
 		mListView = (ListView) view.findViewById(R.id.fragment_book_list);
 
-		mListView.setAdapter(new BookListAdapter(getActivity(),
-				getFragmentManager()));
+		mListView.setAdapter(new BookListAdapter(getActivity()));
 
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 

@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sysu.taosysu.model.BookInfo;
+
 import android.os.AsyncTask;
 
 public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
@@ -79,12 +81,16 @@ public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
 					for (int i = 0; i < jsonBookList.length(); i++) {
 						Map<String, Object> map = new HashMap<String, Object>();
 						JSONObject jsonBook = jsonBookList.getJSONObject(i);
-						map.put("bookId",
+						map.put(BookInfo.BOOK_ID,
 								Integer.parseInt(jsonBook.getString("bookId")));
-						map.put("bookName", jsonBook.getString("bookName"));
-						map.put("content", jsonBook.getString("content"));
-						map.put("time", jsonBook.getString("time"));
-						map.put("authorName", jsonBook.getString("authorName"));
+						map.put(BookInfo.BOOK_NAME,
+								jsonBook.getString("bookName"));
+						map.put(BookInfo.BOOK_CONTENT,
+								jsonBook.getString("content"));
+						map.put(BookInfo.CREATE_TIME,
+								jsonBook.getString("time"));
+						map.put(BookInfo.AUTHOR_NAME,
+								jsonBook.getString("authorName"));
 						bookList.add(map);
 					}
 					listener.onGetBookListSuccess(bookList);

@@ -1,5 +1,6 @@
 package com.sysu.taosysu.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,74 +10,61 @@ import com.sysu.taosysu.R;
 
 public class BookInfo {
 
+	public static final String BOOK_ID = "bookId";
+	public static final String BOOK_NAME = "bookName";
+	public static final String BOOK_CONTENT = "content";
+	public static final String CREATE_TIME = "time";
+	public static final String AUTHOR_NAME = "authorName";
+
 	public static final int DEFAULT_ICON = R.drawable.default_book_cover;
+	
 	private Bitmap bookBitmap;
-	private String uploadUserId;
-	private String bookId;
+	private Integer bookId;
 	private String bookPicPath;
 	private String createTime;
 	private String content;
 	private String bookname;
+	private String authorName;
 
 	public static List<BookInfo> parseList(List<Map<String, Object>> mData) {
-		
-		return null;
+		List<BookInfo> bookList = new ArrayList<BookInfo>();
+		for (Map<String, Object> data : mData) {
+			BookInfo temp = new BookInfo();
+			temp.bookId = (Integer) data.get(BOOK_ID);
+			temp.bookname = (String) data.get(BOOK_NAME);
+			temp.content = (String) data.get(BOOK_CONTENT);
+			temp.createTime = (String) data.get(CREATE_TIME);
+			temp.authorName = (String) data.get(AUTHOR_NAME);
+			bookList.add(temp);
+		}
+		return bookList;
 	}
 
 	public Bitmap getBookBitmap() {
 		return bookBitmap;
 	}
 
-	public void setBookBitmap(Bitmap bookBitmap) {
-		this.bookBitmap = bookBitmap;
-	}
-
-	public String getUploadUserId() {
-		return uploadUserId;
-	}
-
-	public void setUploadUserId(String uploadUserId) {
-		this.uploadUserId = uploadUserId;
-	}
-
-	public String getBookId() {
+	public Integer getBookId() {
 		return bookId;
-	}
-
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
 	}
 
 	public String getBookPicPath() {
 		return bookPicPath;
 	}
 
-	public void setBookPicPath(String bookPicPath) {
-		this.bookPicPath = bookPicPath;
-	}
-
 	public String getCreateTime() {
 		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
 	}
 
 	public String getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getBookname() {
+	public String getBookName() {
 		return bookname;
 	}
 
-	public void setBookname(String bookname) {
-		this.bookname = bookname;
+	public String getAuthorName() {
+		return authorName;
 	}
-
 }
