@@ -1,14 +1,14 @@
 package com.sysu.taosysu.ui.fragment;
 
-import com.sysu.taosysu.LaunchActivity;
-import com.sysu.taosysu.R;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+
+import com.sysu.taosysu.LaunchActivity;
+import com.sysu.taosysu.R;
 
 public class QuitDialogFragment extends DialogFragment implements
 		DialogInterface.OnClickListener {

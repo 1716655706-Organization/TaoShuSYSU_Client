@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.sysu.taosysu.utils.StringUtils;
 
 public class BookDetailFragment extends Fragment {
 
+	private Context mContext;
 	private TextView mTitle;
 	private TextView mContent;
 	private TextView mLabelContainer;
@@ -48,6 +51,8 @@ public class BookDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		mContext = getActivity().getApplicationContext();
+
 		Bundle bundle = getArguments();
 		int bookId = bundle.getInt(BookInfo.BOOK_ID);
 
@@ -82,7 +87,7 @@ public class BookDetailFragment extends Fragment {
 
 					@Override
 					public void onGetCommentFail(String errorMessage) {
-						Toast.makeText(getActivity(), errorMessage,
+						Toast.makeText(mContext, errorMessage,
 								Toast.LENGTH_SHORT).show();
 					}
 				});
@@ -95,11 +100,12 @@ public class BookDetailFragment extends Fragment {
 						mLabelContainer.setText(StringUtils
 								.parseLabelList(labelList));
 						mLabelContainer.invalidate();
+						Log.v("DATA", StringUtils.parseLabelList(labelList));
 					}
 
 					@Override
 					public void onGetLabelFail(String errorMessage) {
-						Toast.makeText(getActivity(), errorMessage,
+						Toast.makeText(mContext, errorMessage,
 								Toast.LENGTH_SHORT).show();
 					}
 				});

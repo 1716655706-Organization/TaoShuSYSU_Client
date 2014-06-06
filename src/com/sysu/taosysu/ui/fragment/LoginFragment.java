@@ -10,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sysu.taosysu.MainActivity;
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.network.LoginAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
+import com.sysu.taosysu.utils.PreferencesUtils;
 import com.sysu.taosysu.utils.StringUtils;
 
 public class LoginFragment extends Fragment implements View.OnClickListener,
@@ -25,7 +25,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	Button loginBtn;
 	EditText nameEt;
 	EditText passwordEt;
-	RelativeLayout mProgressView;
+	WaitingDialogFragment mProgressDialog = new WaitingDialogFragment();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,9 +35,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 		nameEt = (EditText) rootView.findViewById(R.id.input_account);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_password);
-
-		mProgressView = (RelativeLayout) rootView
-				.findViewById(R.id.action_progress);
 
 		nameEt.addTextChangedListener(this);
 		passwordEt.addTextChangedListener(this);
@@ -54,16 +51,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 	@Override
 	public void onClick(View v) {
-		mProgressView.setVisibility(View.VISIBLE);
 		NetworkRequest.login(nameEt.getText().toString(), passwordEt.getText()
 				.toString(), this);
+		getFragmentManager().beginTransaction().add(mProgressDialog, "")
+				.commit();
 	}
 
 	@Override
 	public void onLoginSuccess(int userId) {
-		// TODO save user id
-		Toast.makeText(getActivity(), "" + userId, Toast.LENGTH_LONG).show();
-		mProgressView.setVisibility(View.GONE);
+		mProgressDialog.dismiss();
+		PreferencesUtils.saveUserId(getActivity(), userId);
 
 		startActivity(new Intent(getActivity(), MainActivity.class));
 		getActivity().finish();
@@ -71,13 +68,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 
 	@Override
 	public void onLoginFail(String errorMessage) {
+		mProgressDialog.dismiss();
 		Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-
 	}
 
 	@Override

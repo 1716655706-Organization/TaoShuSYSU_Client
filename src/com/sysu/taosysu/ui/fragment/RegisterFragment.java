@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sysu.taosysu.MainActivity;
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.network.NetworkRequest;
 import com.sysu.taosysu.network.RegisterAsyncTask.OnRequestListener;
+import com.sysu.taosysu.utils.PreferencesUtils;
 import com.sysu.taosysu.utils.StringUtils;
 
 public class RegisterFragment extends Fragment implements TextWatcher,
@@ -27,7 +26,7 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 	EditText passwordEt;
 	EditText confirmPwdEt;
 	Button confirmButton;
-	RelativeLayout mProgessView;
+	WaitingDialogFragment mProgressDialog = new WaitingDialogFragment();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,8 +38,6 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 		usernameEt = (EditText) rootView.findViewById(R.id.input_user_name);
 		passwordEt = (EditText) rootView.findViewById(R.id.input_pwd);
 		confirmPwdEt = (EditText) rootView.findViewById(R.id.input_pwd_confirm);
-		mProgessView = (RelativeLayout) rootView
-				.findViewById(R.id.action_progress);
 
 		usernameEt.addTextChangedListener(this);
 		passwordEt.addTextChangedListener(this);
@@ -80,7 +77,8 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 		String firstPwd = passwordEt.getText().toString();
 		String confirmPwd = confirmPwdEt.getText().toString();
 		if (firstPwd.equals(confirmPwd)) {
-			mProgessView.setVisibility(View.VISIBLE);
+			getFragmentManager().beginTransaction().add(mProgressDialog, null)
+					.commit();
 			NetworkRequest.register(usernameEt.getText().toString(), passwordEt
 					.getText().toString(), this);
 		} else {
@@ -92,16 +90,17 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 
 	@Override
 	public void onRegisterSuccess(int userId) {
+		mProgressDialog.dismiss();
+		PreferencesUtils.saveUserId(getActivity(), userId);
 		getActivity().startActivity(
 				new Intent(getActivity(), MainActivity.class));
-		Toast.makeText(getActivity(), userId+"", Toast.LENGTH_SHORT).show();
-		mProgessView.setVisibility(View.GONE);
+		Toast.makeText(getActivity(), userId + "", Toast.LENGTH_SHORT).show();
 		getActivity().finish();
 	}
 
 	@Override
 	public void onRegisterFail(String errorMessage) {
-		mProgessView.setVisibility(View.GONE);
+		mProgressDialog.dismiss();
 		Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
 	}
 }

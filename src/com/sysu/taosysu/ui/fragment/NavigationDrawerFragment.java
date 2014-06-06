@@ -28,6 +28,7 @@ public class NavigationDrawerFragment extends Fragment {
 	public static final int POSITION_SEARCH = 3;
 	public static final int POSITION_NOTIFICATION = 4;
 	public static final int POSITION_SETTING = 5;
+	public static final int POSITION_QUIT = 6;
 
 	private NavigationDrawerCallbacks mCallbacks;
 
@@ -42,13 +43,6 @@ public class NavigationDrawerFragment extends Fragment {
 	private boolean mUserLearnedDrawer;
 
 	public NavigationDrawerFragment() {
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		selectItem(mCurrentSelectedPosition);
 	}
 
 	@Override

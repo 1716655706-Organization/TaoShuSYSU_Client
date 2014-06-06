@@ -13,6 +13,7 @@ import com.sysu.taosysu.ui.fragment.BookListFragment;
 import com.sysu.taosysu.ui.fragment.NavigationDrawerFragment;
 import com.sysu.taosysu.ui.fragment.NotificationFragment;
 import com.sysu.taosysu.ui.fragment.PublishBookFragment;
+import com.sysu.taosysu.ui.fragment.QuitDialogFragment;
 import com.sysu.taosysu.ui.fragment.SearchFragment;
 import com.sysu.taosysu.ui.fragment.SettingsFragment;
 
@@ -57,13 +58,18 @@ public class MainActivity extends Activity implements
 		case NavigationDrawerFragment.POSITION_SETTING:
 			mFragment = new SettingsFragment();
 			break;
+		case NavigationDrawerFragment.POSITION_QUIT:
+			mFragment = new QuitDialogFragment();
+			break;
 		default:
 			break;
 		}
 
 		FragmentManager fm = getFragmentManager();
-		if (mFragment != null) {
+		if (!(mFragment == null && (mFragment instanceof QuitDialogFragment))) {
 			fm.beginTransaction().replace(R.id.container, mFragment).commit();
+		} else if (mFragment instanceof QuitDialogFragment) {
+			fm.beginTransaction().add(mFragment, "Quit").commit();
 		}
 	}
 

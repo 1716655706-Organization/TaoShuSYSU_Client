@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sysu.taosysu.R;
+import com.sysu.taosysu.network.NetworkRequest;
+import com.sysu.taosysu.network.UploadBookAsyncTask;
+import com.sysu.taosysu.utils.PreferencesUtils;
 import com.sysu.taosysu.utils.StringUtils;
 
 public class PublishBookFragment extends Fragment implements TextWatcher,
@@ -48,15 +52,19 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 					.isEmpty(labelEt));
 	}
 
+	private void clearAllContent() {
+		booknameEt.setText("");
+		descriptEt.setText("");
+		labelEt.setText("");
+	}
+
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-
 	}
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-
 	}
 
 	@Override
@@ -66,8 +74,27 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 
 	@Override
 	public void onClick(View v) {
-//		String content = labelEt.getText().toString();
-//		List<String> labelList = StringUtils.parseLabelsFromText(content);
-		
+		int userId = PreferencesUtils.getUserId(getActivity());
+		String bookName = booknameEt.getText().toString();
+		String content = descriptEt.getText().toString();
+		String[] label = StringUtils.parseToStringArray(labelEt.getText()
+				.toString());
+
+		NetworkRequest.uploadBook(userId, bookName, content, label,
+				new UploadBookAsyncTask.OnRequestListener() {
+
+					@Override
+					public void onUploadBookSuccess() {
+						Toast.makeText(getActivity(), "上传成功",
+								Toast.LENGTH_SHORT).show();
+						clearAllContent();
+					}
+
+					@Override
+					public void onUploadBookFail(String errorMessage) {
+						Toast.makeText(getActivity(), errorMessage,
+								Toast.LENGTH_SHORT).show();
+					}
+				});
 	}
 }

@@ -58,12 +58,4 @@
 		android:paddingTop="1dp"
 		android:text="@string/login" />
 
-	<include
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_centerInParent="true"
-		android:layout_margin="20dp"
-		android:visibility="gone"
-		layout="@layout/action_progress" />
-
 </RelativeLayout>

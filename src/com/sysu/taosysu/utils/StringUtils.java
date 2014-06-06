@@ -29,4 +29,8 @@ public class StringUtils {
 		return content;
 	}
 
+	public static String[] parseToStringArray(String labels) {
+		return labels.split(" ");
+	}
+
 }
