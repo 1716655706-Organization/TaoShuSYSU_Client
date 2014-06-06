@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.sysu.taosysu.model.Comment;
+
 import android.os.AsyncTask;
 
 public class GetCommentAsyncTask extends AsyncTask<String, Integer, String> {
@@ -27,12 +29,12 @@ public class GetCommentAsyncTask extends AsyncTask<String, Integer, String> {
 	private int commandId = 1;
 	private int bookId;
 	private OnRequestListener listener;
-	
+
 	public GetCommentAsyncTask(int bookId, OnRequestListener listener) {
 		this.bookId = bookId;
 		this.listener = listener;
 	}
-	
+
 	@Override
 	protected String doInBackground(String... params) {
 		HttpPost request = new HttpPost(params[0]);
@@ -61,7 +63,7 @@ public class GetCommentAsyncTask extends AsyncTask<String, Integer, String> {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
@@ -73,12 +75,16 @@ public class GetCommentAsyncTask extends AsyncTask<String, Integer, String> {
 					JSONArray jsonCommentList = msg.getJSONArray("commentList");
 					List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
 					for (int i = 0; i < jsonCommentList.length(); i++) {
-						JSONObject jsonComment = jsonCommentList.getJSONObject(i);
+						JSONObject jsonComment = jsonCommentList
+								.getJSONObject(i);
 						Map<String, Object> comment = new HashMap<String, Object>();
-						comment.put("content", jsonComment.getString("content"));
-						comment.put("time", jsonComment.getString("time"));
-						comment.put("authorName", jsonComment.getString("authorName"));
-						comment.put("authorId", Integer.parseInt(jsonComment.getString("authorId")));
+						comment.put(Comment.CONTENT,
+								jsonComment.getString("content"));
+						comment.put(Comment.TIME, jsonComment.getString("time"));
+						comment.put(Comment.AUTHOR_NAME,
+								jsonComment.getString("authorName"));
+						comment.put(Comment.AUTHOR_ID, Integer
+								.parseInt(jsonComment.getString("authorId")));
 						commentList.add(comment);
 					}
 					listener.onGetCommentSuccess(commentList);
@@ -96,7 +102,8 @@ public class GetCommentAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public interface OnRequestListener {
 		void onGetCommentSuccess(List<Map<String, Object>> comments);
+
 		void onGetCommentFail(String errorMessage);
 	}
-	
+
 }

@@ -1,23 +1,17 @@
 package com.sysu.taosysu.ui.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.model.BookInfo;
-import com.sysu.taosysu.network.GetBookListAsyncTask.OnRequestListener;
-import com.sysu.taosysu.network.NetworkRequest;
 
 public class BookListAdapter extends BaseAdapter {
 
@@ -31,28 +25,9 @@ public class BookListAdapter extends BaseAdapter {
 	TextView mAuthorTv;
 	TextView mCreateTimeTv;
 
-	public BookListAdapter(Context context) {
+	public BookListAdapter(Context context, List<BookInfo> data) {
 		this.mContext = context;
-		init();
-	}
-
-	private void init() {
-		mData = new ArrayList<BookInfo>();
-
-		NetworkRequest.getBookList(-1, 4, new OnRequestListener() {
-
-			@Override
-			public void onGetBookListSuccess(List<Map<String, Object>> bookList) {
-				mData = BookInfo.parseList(bookList);
-				notifyDataSetChanged();
-			}
-
-			@Override
-			public void onGetBookListFail(String errorMessage) {
-				Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT)
-						.show();
-			}
-		});
+		this.mData = data;
 	}
 
 	@Override

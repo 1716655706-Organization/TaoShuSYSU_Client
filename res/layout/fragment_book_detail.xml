@@ -29,23 +29,17 @@
 			android:text="@string/default_book_name"
 			android:textAppearance="?android:attr/textAppearanceMedium" />
 
-		<ScrollView
-			android:id="@+id/book_introduce_scroller"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+		<TextView
+			android:id="@+id/book_introduce"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 			android:layout_alignBottom="@+id/book_img"
 			android:layout_alignRight="@+id/book_name"
 			android:layout_below="@+id/book_name"
 			android:layout_marginTop="10dp"
-			android:layout_toRightOf="@+id/book_img" >
-
-			<TextView
-				android:id="@+id/book_introduce"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:text="@string/default_long_book_introduce"
-				android:textAppearance="?android:attr/textAppearanceMedium" />
-		</ScrollView>
+			android:layout_toRightOf="@+id/book_img"
+			android:text="@string/default_long_book_introduce"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
 
 		<TextView
 			android:id="@+id/label"
