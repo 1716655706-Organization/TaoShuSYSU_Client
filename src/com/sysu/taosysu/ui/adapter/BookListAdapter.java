@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.model.BookInfo;
+import com.sysu.taosysu.utils.StringUtils;
 
 public class BookListAdapter extends BaseAdapter {
 
@@ -63,7 +64,8 @@ public class BookListAdapter extends BaseAdapter {
 
 		mBookIdTv.setText(mData.get(position).getBookId().toString());
 		mBookNameTv.setText(mData.get(position).getBookName());
-		mBookContentTv.setText(mData.get(position).getContent());
+		mBookContentTv.setText(StringUtils.getSimpleIntro(mData.get(position)
+				.getContent()));
 		mCreateTimeTv.setText(mData.get(position).getCreateTime());
 		mAuthorTv.setText(mData.get(position).getAuthorName());
 		mBookCover.setImageResource(R.drawable.default_book_cover);

@@ -7,7 +7,10 @@ import java.util.Map;
 import android.graphics.Bitmap;
 
 import com.sysu.taosysu.R;
-
+/**
+ * 书籍信息的实体类
+ * @author kuxinwei
+ */
 public class BookInfo {
 
 	public static final String BOOK_ID = "bookId";

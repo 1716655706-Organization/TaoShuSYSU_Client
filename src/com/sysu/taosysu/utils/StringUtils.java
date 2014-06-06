@@ -1,6 +1,5 @@
 package com.sysu.taosysu.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.widget.EditText;
@@ -12,10 +11,22 @@ public class StringUtils {
 		return content.isEmpty();
 	}
 
-	public static List<String> parseLabelsFromText(String content) {
-		List<String> labels = new ArrayList<String>();
+	public static String parseLabelList(List<String> labelList) {
 
-		return labels;
+		StringBuilder sb = new StringBuilder();
+		for (String label : labelList) {
+			sb.append(label).append(" | ");
+		}
+
+		return sb.toString();
+	}
+
+	public static String getSimpleIntro(String content) {
+		if (content.length() > 30) {
+			content = content.substring(0, 30);
+			content += "...";
+		}
+		return content;
 	}
 
 }

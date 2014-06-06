@@ -1,7 +1,12 @@
 package com.sysu.taosysu.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 评论的实体类
+ * 
  * @author kuxinwei
  */
 public class Comment {
@@ -14,7 +19,21 @@ public class Comment {
 	private String content;
 	private String time;
 	private String authorName;
-	private String authorId;
+	private int authorId;
+
+	public static List<Comment> parseList(List<Map<String, Object>> data) {
+		List<Comment> commentList = new ArrayList<Comment>();
+		for (Map<String, Object> tMap : data) {
+			Comment tComment = new Comment();
+			tComment.authorId = (Integer) tMap.get(Comment.AUTHOR_ID);
+			tComment.authorName = (String) tMap.get(Comment.AUTHOR_NAME);
+			tComment.time = (String) tMap.get(Comment.TIME);
+			tComment.content = (String) tMap.get(Comment.CONTENT);
+			commentList.add(tComment);
+		}
+
+		return commentList;
+	}
 
 	public String getContent() {
 		return content;
@@ -40,11 +59,11 @@ public class Comment {
 		this.authorName = authorName;
 	}
 
-	public String getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
 
-	public void setAuthorId(String authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
 
