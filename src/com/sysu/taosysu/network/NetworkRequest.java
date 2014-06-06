@@ -30,12 +30,14 @@ public class NetworkRequest {
 		new GetBookListAsyncTask(startBookId, size, listener)
 				.execute(SERVER_URI);
 	}
-	
-	public static void getBookLabel(int bookId, GetLabelAsyncTask.OnRequestListener listener) {
+
+	public static void getBookLabel(int bookId,
+			GetLabelAsyncTask.OnRequestListener listener) {
 		new GetLabelAsyncTask(bookId, listener).execute(SERVER_URI);
 	}
-	
-	public static void getBookComment(int bookId, GetCommentAsyncTask.OnRequestListener listener) {
+
+	public static void getBookComment(int bookId,
+			GetCommentAsyncTask.OnRequestListener listener) {
 		new GetCommentAsyncTask(bookId, listener).execute(SERVER_URI);
 	}
 }

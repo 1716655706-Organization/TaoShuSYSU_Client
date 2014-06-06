@@ -21,4 +21,11 @@ public class PreferencesUtils {
 		preferences = context.getSharedPreferences(NAME, MODE);
 		return preferences.getInt(USER_ID, -1);
 	}
+
+	public static void clear(Context context) {
+		preferences = context.getSharedPreferences(NAME, MODE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.clear();
+		editor.commit();
+	}
 }

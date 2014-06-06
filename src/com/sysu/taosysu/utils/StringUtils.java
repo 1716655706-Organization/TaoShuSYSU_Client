@@ -14,8 +14,10 @@ public class StringUtils {
 	public static String parseLabelList(List<String> labelList) {
 
 		StringBuilder sb = new StringBuilder();
-		for (String label : labelList) {
-			sb.append(label).append(" | ");
+		if (labelList != null) {
+			for (String label : labelList) {
+				sb.append(label).append(" | ");
+			}
 		}
 
 		return sb.toString();

@@ -38,6 +38,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
+	@SuppressWarnings("unused")
 	private int mCurrentSelectedPosition = 0;
 	private boolean mFromSavedInstanceState;
 	private boolean mUserLearnedDrawer;

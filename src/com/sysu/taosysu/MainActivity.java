@@ -66,10 +66,10 @@ public class MainActivity extends Activity implements
 		}
 
 		FragmentManager fm = getFragmentManager();
-		if (!(mFragment == null && (mFragment instanceof QuitDialogFragment))) {
+		if ((mFragment != null) && (!(mFragment instanceof QuitDialogFragment))) {
 			fm.beginTransaction().replace(R.id.container, mFragment).commit();
 		} else if (mFragment instanceof QuitDialogFragment) {
-			fm.beginTransaction().add(mFragment, "Quit").commit();
+			fm.beginTransaction().add(mFragment, null).commit();
 		}
 	}
 

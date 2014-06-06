@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.sysu.taosysu.LaunchActivity;
 import com.sysu.taosysu.R;
+import com.sysu.taosysu.utils.PreferencesUtils;
 
 public class QuitDialogFragment extends DialogFragment implements
 		DialogInterface.OnClickListener {
@@ -28,6 +29,7 @@ public class QuitDialogFragment extends DialogFragment implements
 	public void onClick(DialogInterface dialog, int which) {
 		switch (which) {
 		case DialogInterface.BUTTON_POSITIVE:
+			PreferencesUtils.clear(getActivity());
 			startActivity(new Intent(getActivity(), LaunchActivity.class));
 			getActivity().finish();
 			break;

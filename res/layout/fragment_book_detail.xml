@@ -62,8 +62,7 @@
 				android:layout_alignLeft="@+id/book_img"
 				android:layout_alignRight="@+id/book_name"
 				android:layout_below="@+id/label"
-				android:layout_margin="5dp"
-				android:text="@string/labels" >
+				android:layout_margin="5dp" >
 			</TextView>
 
 			<TextView
@@ -83,21 +82,6 @@
 				android:layout_alignRight="@+id/book_name"
 				android:layout_below="@+id/comment"
 				android:orientation="vertical" >
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="100dp"
-					android:background="#dd3" />
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="100dp"
-					android:background="#dd3" />
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="100dp"
-					android:background="#dd3" />
 			</LinearLayout>
 		</RelativeLayout>
 	</ScrollView>

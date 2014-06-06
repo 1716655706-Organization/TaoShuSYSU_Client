@@ -55,7 +55,9 @@
 		<item>标签</item>
 	</string-array>
 
-	<string name="default_user_name">Kuxinwei</string>
+	<string name="default_comment">默认评论</string>
+	<string name="default_comment_time">2014.4.1</string>
+	<string name="default_user_name">苦辛味</string>
 	<string name="default_user_join_time">2014.4.2</string>
 	<string name="drawer_icon">drawer_icon</string>
 	<string name="default_drawer_text">默认</string>

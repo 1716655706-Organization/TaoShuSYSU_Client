@@ -99,7 +99,7 @@ public class BookListFragment extends Fragment implements
 				.findViewById(R.id.swiper);
 		mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
 				android.R.color.holo_blue_bright,
-				android.R.color.holo_blue_bright,
+				android.R.color.holo_green_light,
 				android.R.color.holo_blue_bright);
 		mSwipeRefreshLayout.setOnRefreshListener(this);
 
