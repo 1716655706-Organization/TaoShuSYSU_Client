@@ -40,4 +40,22 @@ public class NetworkRequest {
 			GetCommentAsyncTask.OnRequestListener listener) {
 		new GetCommentAsyncTask(bookId, listener).execute(SERVER_URI);
 	}
+
+	public static void getBookListByUserId(int userId, int startBookId,
+			int size, GetBookListByUserIdAsyncTask.OnRequestListener listener) {
+		new GetBookListByUserIdAsyncTask(userId, startBookId, size, listener)
+				.execute(SERVER_URI);
+	}
+
+	public static void getBookListByBookName(String bookName, int startBookId,
+			int size, GetBookListByBookNameAsyncTask.OnRequestListener listener) {
+		new GetBookListByBookNameAsyncTask(bookName, startBookId, size, listener)
+				.execute(SERVER_URI);
+	}
+
+	public static void getBookListByLabel(String label, int startBookId,
+			int size, GetBookListByLabelAsyncTask.OnRequestListener listener) {
+		new GetBookListByLabelAsyncTask(label, startBookId, size, listener)
+				.execute(SERVER_URI);
+	}
 }

@@ -108,7 +108,6 @@ public class GetBookListAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public interface OnRequestListener {
 		void onGetBookListSuccess(List<Map<String, Object>> bookList);
-
 		void onGetBookListFail(String errorMessage);
 	}
 }
