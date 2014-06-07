@@ -51,15 +51,9 @@ public class MainActivity extends Activity implements
 		case NavigationDrawerFragment.POSITION_PUBLISH:
 			mFragment = new PublishBookFragment();
 			break;
-//		case NavigationDrawerFragment.POSITION_NOTIFICATION:
-//			mFragment = new NotificationFragment();
-//			break;
 		case NavigationDrawerFragment.POSITION_SEARCH:
 			mFragment = new SearchFragment();
 			break;
-//		case NavigationDrawerFragment.POSITION_SETTING:
-//			mFragment = new SettingsFragment();
-//			break;
 		case NavigationDrawerFragment.POSITION_QUIT:
 			mFragment = new QuitDialogFragment();
 			break;
@@ -69,7 +63,8 @@ public class MainActivity extends Activity implements
 
 		FragmentManager fm = getFragmentManager();
 		if ((mFragment != null) && (!(mFragment instanceof QuitDialogFragment))) {
-			fm.beginTransaction().replace(R.id.container, mFragment).commit();
+			fm.beginTransaction().replace(R.id.container, mFragment)
+					.addToBackStack(null).commit();
 		} else if (mFragment instanceof QuitDialogFragment) {
 			fm.beginTransaction().add(mFragment, null).commit();
 		}

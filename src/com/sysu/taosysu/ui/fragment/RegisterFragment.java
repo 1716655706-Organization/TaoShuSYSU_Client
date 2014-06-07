@@ -94,7 +94,6 @@ public class RegisterFragment extends Fragment implements TextWatcher,
 		PreferencesUtils.saveUserId(getActivity(), userId);
 		getActivity().startActivity(
 				new Intent(getActivity(), MainActivity.class));
-		Toast.makeText(getActivity(), userId + "", Toast.LENGTH_SHORT).show();
 		getActivity().finish();
 	}
 

@@ -3,8 +3,7 @@ package com.sysu.taosysu.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import android.graphics.Bitmap;
+import java.util.Random;
 
 import com.sysu.taosysu.R;
 
@@ -22,14 +21,18 @@ public class BookInfo {
 	public static final String AUTHOR_NAME = "authorName";
 
 	public static final int DEFAULT_ICON = R.drawable.default_book_cover;
+	public static final int[] DEFAULT_ICON_ARRAY = new int[] {
+			R.drawable.default_book_cover, R.drawable.default_book_cover_1,
+			R.drawable.default_book_cover_2, R.drawable.default_book_cover_3 };
+	public static final String BOOK_IMAGE = "image";
 
-	private Bitmap bookBitmap;
 	private Integer bookId;
 	private String bookPicPath;
 	private String createTime;
 	private String content;
 	private String bookname;
 	private String authorName;
+	private int image;
 
 	@Override
 	public boolean equals(Object o) {
@@ -37,6 +40,9 @@ public class BookInfo {
 			return this.bookId.intValue() == ((BookInfo) o).bookId.intValue();
 		}
 		return false;
+	}
+	public BookInfo() {
+		image = BookInfo.getBookCoverIcon();
 	}
 
 	public static List<BookInfo> parseList(List<Map<String, Object>> mData) {
@@ -51,10 +57,6 @@ public class BookInfo {
 			bookList.add(temp);
 		}
 		return bookList;
-	}
-
-	public Bitmap getBookBitmap() {
-		return bookBitmap;
 	}
 
 	public Integer getBookId() {
@@ -79,5 +81,19 @@ public class BookInfo {
 
 	public String getAuthorName() {
 		return authorName;
+	}
+
+	public static int getBookCoverIcon() {
+		Random random = new Random();
+		int i = Math.abs(random.nextInt()) % DEFAULT_ICON_ARRAY.length;
+		return DEFAULT_ICON_ARRAY[i];
+	}
+
+	public int getImage() {
+		return image;
+	}
+
+	public void setImage(int image) {
+		this.image = image;
 	}
 }

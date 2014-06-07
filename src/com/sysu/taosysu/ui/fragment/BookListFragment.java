@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import android.R.bool;
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,13 +28,14 @@ public class BookListFragment extends Fragment implements
 		SwipeRefreshLayout.OnRefreshListener,
 		GetBookListAsyncTask.OnRequestListener, AbsListView.OnScrollListener {
 
-	private Context mContext;
 	private static final int NEWEST = -1;
 	private int currentId = NEWEST;
+	private static int REQUIRE_SIZE = 5;
 
-	private static int SIZE = 5;
-	// private static final int GET_OLDER_DATA = 1;
+	private boolean isGetOlderItem = false;
+	private boolean isGetNewerItem = false;
 
+	Context mContext;
 	ListView mListView;
 	BookListAdapter adapter;
 	SwipeRefreshLayout mSwipeRefreshLayout;
@@ -48,6 +45,7 @@ public class BookListFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+
 		mContext = getActivity().getApplicationContext();
 
 		View rootView = inflater.inflate(R.layout.fragment_book_list,
@@ -70,7 +68,6 @@ public class BookListFragment extends Fragment implements
 		});
 
 		mListView.setOnScrollListener(this);
-
 		mSwipeRefreshLayout = (SwipeRefreshLayout) rootView
 				.findViewById(R.id.swiper);
 		mSwipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -86,17 +83,13 @@ public class BookListFragment extends Fragment implements
 
 	private void update(int currentId) {
 		mSwipeRefreshLayout.setRefreshing(true);
-		NetworkRequest.getBookList(currentId, SIZE, this);
+		NetworkRequest.getBookList(currentId, REQUIRE_SIZE, this);
 	}
 
-	/*
-	 * 下拉刷新时获取最新内容
-	 * 
-	 * @see
-	 * android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener#onRefresh
-	 */
 	@Override
 	public void onRefresh() {
+		isGetNewerItem = true;
+		isGetOlderItem = false;
 		update(NEWEST);
 	}
 
@@ -104,7 +97,8 @@ public class BookListFragment extends Fragment implements
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		if (scrollState == SCROLL_STATE_IDLE) {
 			if (view.getLastVisiblePosition() == (mDataList.size() - 1)) {
-				Log.i("DATA", "Scroll changed UPDATE");
+				isGetOlderItem = true;
+				isGetNewerItem = false;
 				update(currentId);
 			}
 		}
@@ -118,15 +112,23 @@ public class BookListFragment extends Fragment implements
 	@Override
 	public void onGetBookListSuccess(List<Map<String, Object>> bookList) {
 		List<BookInfo> tBookList = BookInfo.parseList(bookList);
-		if (tBookList == null || tBookList.isEmpty())
+		if (tBookList == null || tBookList.isEmpty()) {
 			return;
+		}
 
-		else if (mDataList.isEmpty())
+		else if (mDataList.isEmpty()) {
 			mDataList.addAll(tBookList);
-		else {
+		} else {
+			int size = mDataList.size();
 			for (BookInfo tBook : tBookList) {
 				if (!mDataList.contains(tBook))
 					mDataList.add(tBook);
+			}
+			if (mDataList.size() == size) {
+				if (isGetNewerItem)
+					showMessage("已经是最新数据");
+				else if (isGetOlderItem)
+					showMessage("没有更多数据");
 			}
 		}
 
@@ -136,7 +138,7 @@ public class BookListFragment extends Fragment implements
 			showMessage("刷新成功");
 		}
 
-		currentId += SIZE;
+		currentId += REQUIRE_SIZE;
 
 		mSwipeRefreshLayout.setRefreshing(false);
 	}

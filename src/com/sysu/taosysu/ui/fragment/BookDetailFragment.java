@@ -61,7 +61,7 @@ public class BookDetailFragment extends Fragment implements
 		bundle.putString(BookInfo.BOOK_CONTENT, book.getContent());
 		bundle.putString(BookInfo.AUTHOR_NAME, book.getAuthorName());
 		bundle.putString(BookInfo.CREATE_TIME, book.getCreateTime());
-
+		bundle.putInt(BookInfo.BOOK_IMAGE, book.getImage());
 		tFragment.setArguments(bundle);
 
 		return tFragment;
@@ -137,7 +137,7 @@ public class BookDetailFragment extends Fragment implements
 	}
 
 	private void initShowContent(Bundle bundle) {
-		mBookCover.setImageResource(BookInfo.DEFAULT_ICON);
+		mBookCover.setImageResource(bundle.getInt(BookInfo.BOOK_IMAGE));
 		mTitle.setText(bundle.getString(BookInfo.BOOK_NAME));
 		mContent.setText(bundle.getString(BookInfo.BOOK_CONTENT));
 	}

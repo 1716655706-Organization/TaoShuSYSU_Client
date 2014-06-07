@@ -69,7 +69,7 @@ public class BookListAdapter extends BaseAdapter {
 				.getContent()));
 		mCreateTimeTv.setText(mData.get(position).getCreateTime());
 		mAuthorTv.setText(mData.get(position).getAuthorName());
-		mBookCover.setImageResource(R.drawable.default_book_cover);
+		mBookCover.setImageResource(mData.get(position).getImage());
 
 		return convertView;
 	}
