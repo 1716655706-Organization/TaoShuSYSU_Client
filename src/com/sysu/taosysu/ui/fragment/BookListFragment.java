@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.R.bool;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
@@ -23,50 +24,24 @@ import android.widget.Toast;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.model.BookInfo;
-import com.sysu.taosysu.network.GetBookListAsyncTask.OnRequestListener;
+import com.sysu.taosysu.network.GetBookListAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
 import com.sysu.taosysu.ui.adapter.BookListAdapter;
 
 public class BookListFragment extends Fragment implements
-		SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+		SwipeRefreshLayout.OnRefreshListener,
+		GetBookListAsyncTask.OnRequestListener, AbsListView.OnScrollListener {
 
 	private Context mContext;
-	private int currentId = -1;
+	private static final int NEWEST = -1;
+	private int currentId = NEWEST;
+
 	private static int SIZE = 5;
-	private static final int GET_OLDER_DATA = 1;
+	// private static final int GET_OLDER_DATA = 1;
 
 	ListView mListView;
 	BookListAdapter adapter;
 	SwipeRefreshLayout mSwipeRefreshLayout;
-
-	@SuppressLint("HandlerLeak")
-	Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case GET_OLDER_DATA:
-				NetworkRequest.getBookList(currentId, SIZE,
-						new OnRequestListener() {
-
-							@Override
-							public void onGetBookListSuccess(
-									List<Map<String, Object>> bookList) {
-								mDataList.addAll(BookInfo.parseList(bookList));
-								adapter.notifyDataSetChanged();
-								Log.i("DATA", mDataList.size() + "");
-							}
-
-							@Override
-							public void onGetBookListFail(String errorMessage) {
-
-							}
-						});
-				break;
-
-			default:
-				break;
-			}
-		};
-	};
 
 	List<BookInfo> mDataList = new ArrayList<BookInfo>();
 
@@ -78,7 +53,8 @@ public class BookListFragment extends Fragment implements
 		View rootView = inflater.inflate(R.layout.fragment_book_list,
 				container, false);
 		mListView = (ListView) rootView.findViewById(R.id.fragment_book_list);
-
+		adapter = new BookListAdapter(getActivity(), mDataList);
+		mListView.setAdapter(adapter);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -103,46 +79,33 @@ public class BookListFragment extends Fragment implements
 				android.R.color.holo_blue_bright);
 		mSwipeRefreshLayout.setOnRefreshListener(this);
 
-		init();
+		update(NEWEST);
 
 		return rootView;
 	}
 
-	private void init() {
+	private void update(int currentId) {
 		mSwipeRefreshLayout.setRefreshing(true);
-		NetworkRequest.getBookList(currentId, SIZE, new OnRequestListener() {
-
-			@Override
-			public void onGetBookListSuccess(List<Map<String, Object>> bookList) {
-				mDataList = BookInfo.parseList(bookList);
-
-				adapter = new BookListAdapter(getActivity(), mDataList);
-				mListView.setAdapter(adapter);
-
-				currentId += SIZE + 1;
-				mSwipeRefreshLayout.setRefreshing(false);
-				Toast.makeText(mContext, "刷新成功", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onGetBookListFail(String errorMessage) {
-				mSwipeRefreshLayout.setRefreshing(false);
-				Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT)
-						.show();
-			}
-		});
+		NetworkRequest.getBookList(currentId, SIZE, this);
 	}
 
+	/*
+	 * 下拉刷新时获取最新内容
+	 * 
+	 * @see
+	 * android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener#onRefresh
+	 */
 	@Override
 	public void onRefresh() {
-		init();
+		update(NEWEST);
 	}
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		if (scrollState == SCROLL_STATE_IDLE) {
-			if (view.getLastVisiblePosition() == mDataList.size()) {
-
+			if (view.getLastVisiblePosition() == (mDataList.size() - 1)) {
+				Log.i("DATA", "Scroll changed UPDATE");
+				update(currentId);
 			}
 		}
 	}
@@ -150,8 +113,42 @@ public class BookListFragment extends Fragment implements
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		if (view.getLastVisiblePosition() == totalItemCount) {
-			handler.sendEmptyMessage(GET_OLDER_DATA);
+	}
+
+	@Override
+	public void onGetBookListSuccess(List<Map<String, Object>> bookList) {
+		List<BookInfo> tBookList = BookInfo.parseList(bookList);
+		if (tBookList == null || tBookList.isEmpty())
+			return;
+
+		else if (mDataList.isEmpty())
+			mDataList.addAll(tBookList);
+		else {
+			for (BookInfo tBook : tBookList) {
+				if (!mDataList.contains(tBook))
+					mDataList.add(tBook);
+			}
 		}
+
+		((BookListAdapter) mListView.getAdapter()).notifyDataSetChanged();
+		if (currentId == NEWEST) {
+			currentId += 1;
+			showMessage("刷新成功");
+		}
+
+		currentId += SIZE;
+
+		mSwipeRefreshLayout.setRefreshing(false);
+	}
+
+	@Override
+	public void onGetBookListFail(String errorMessage) {
+		mSwipeRefreshLayout.setRefreshing(false);
+		showMessage(errorMessage);
+	}
+
+	private void showMessage(String errorMessage) {
+		Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT).show();
+
 	}
 }

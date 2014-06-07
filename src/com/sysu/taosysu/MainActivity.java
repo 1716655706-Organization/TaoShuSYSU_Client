@@ -11,12 +11,10 @@ import android.view.MenuItem;
 
 import com.sysu.taosysu.ui.fragment.BookListFragment;
 import com.sysu.taosysu.ui.fragment.NavigationDrawerFragment;
-import com.sysu.taosysu.ui.fragment.NotificationFragment;
 import com.sysu.taosysu.ui.fragment.PersonalInfoFragment;
 import com.sysu.taosysu.ui.fragment.PublishBookFragment;
 import com.sysu.taosysu.ui.fragment.QuitDialogFragment;
 import com.sysu.taosysu.ui.fragment.SearchFragment;
-import com.sysu.taosysu.ui.fragment.SettingsFragment;
 
 public class MainActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -53,15 +51,15 @@ public class MainActivity extends Activity implements
 		case NavigationDrawerFragment.POSITION_PUBLISH:
 			mFragment = new PublishBookFragment();
 			break;
-		case NavigationDrawerFragment.POSITION_NOTIFICATION:
-			mFragment = new NotificationFragment();
-			break;
+//		case NavigationDrawerFragment.POSITION_NOTIFICATION:
+//			mFragment = new NotificationFragment();
+//			break;
 		case NavigationDrawerFragment.POSITION_SEARCH:
 			mFragment = new SearchFragment();
 			break;
-		case NavigationDrawerFragment.POSITION_SETTING:
-			mFragment = new SettingsFragment();
-			break;
+//		case NavigationDrawerFragment.POSITION_SETTING:
+//			mFragment = new SettingsFragment();
+//			break;
 		case NavigationDrawerFragment.POSITION_QUIT:
 			mFragment = new QuitDialogFragment();
 			break;

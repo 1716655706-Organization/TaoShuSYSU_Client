@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	public void onClick(View v) {
 		NetworkRequest.login(nameEt.getText().toString(), passwordEt.getText()
 				.toString(), this);
-		getFragmentManager().beginTransaction().add(mProgressDialog, "")
+		getFragmentManager().beginTransaction().add(mProgressDialog, null)
 				.commit();
 	}
 
@@ -61,7 +61,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener,
 	public void onLoginSuccess(int userId) {
 		mProgressDialog.dismiss();
 		PreferencesUtils.saveUserId(getActivity(), userId);
-
 		startActivity(new Intent(getActivity(), MainActivity.class));
 		getActivity().finish();
 	}

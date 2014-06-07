@@ -26,9 +26,7 @@ public class NavigationDrawerFragment extends Fragment {
 	public static final int POSITION_HOME = 1;
 	public static final int POSITION_PUBLISH = 2;
 	public static final int POSITION_SEARCH = 3;
-	public static final int POSITION_NOTIFICATION = 4;
-	public static final int POSITION_SETTING = 5;
-	public static final int POSITION_QUIT = 6;
+	public static final int POSITION_QUIT = 4;
 
 	private NavigationDrawerCallbacks mCallbacks;
 
@@ -111,8 +109,7 @@ public class NavigationDrawerFragment extends Fragment {
 					mUserLearnedDrawer = true;
 				}
 
-				getActivity().invalidateOptionsMenu(); // calls
-														// onPrepareOptionsMenu()
+				getActivity().invalidateOptionsMenu();
 			}
 		};
 
@@ -120,7 +117,6 @@ public class NavigationDrawerFragment extends Fragment {
 			mDrawerLayout.openDrawer(mFragmentContainerView);
 		}
 
-		// Defer code dependent on restoration of previous instance state.
 		mDrawerLayout.post(new Runnable() {
 			@Override
 			public void run() {

@@ -7,8 +7,10 @@ import java.util.Map;
 import android.graphics.Bitmap;
 
 import com.sysu.taosysu.R;
+
 /**
  * 书籍信息的实体类
+ * 
  * @author kuxinwei
  */
 public class BookInfo {
@@ -20,7 +22,7 @@ public class BookInfo {
 	public static final String AUTHOR_NAME = "authorName";
 
 	public static final int DEFAULT_ICON = R.drawable.default_book_cover;
-	
+
 	private Bitmap bookBitmap;
 	private Integer bookId;
 	private String bookPicPath;
@@ -28,6 +30,14 @@ public class BookInfo {
 	private String content;
 	private String bookname;
 	private String authorName;
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof BookInfo) {
+			return this.bookId.intValue() == ((BookInfo) o).bookId.intValue();
+		}
+		return false;
+	}
 
 	public static List<BookInfo> parseList(List<Map<String, Object>> mData) {
 		List<BookInfo> bookList = new ArrayList<BookInfo>();

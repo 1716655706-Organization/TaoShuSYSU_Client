@@ -32,8 +32,6 @@
 		<item>首页</item>
 		<item>发布</item>
 		<item>搜索</item>
-		<item>提醒</item>
-		<item>设置</item>
 		<item>退出</item>
 	</string-array>
 
@@ -41,8 +39,6 @@
 		<item>@drawable/ic_drawer_home</item>
 		<item>@drawable/ic_drawer_new</item>
 		<item>@drawable/ic_drawer_search</item>
-		<item>@drawable/ic_drawer_bell</item>
-		<item>@drawable/ic_drawer_settings</item>
 		<item>@drawable/ic_drawer_logout</item>
 	</array>
 
