@@ -37,7 +37,8 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 		nameTv = (TextView) rootView.findViewById(R.id.user_name);
 		timeTv = (TextView) rootView.findViewById(R.id.user_join_time);
 		initBookList();
-		mBookListView = (ListView) rootView.findViewById(R.id.book_user_upload);
+		mBookListView = (ListView) rootView
+				.findViewById(R.id.user_upload_book_list);
 
 		mBookListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,11 +48,12 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 							int position, long id) {
 						getFragmentManager()
 								.beginTransaction()
-								.add(R.id.container,
+								.replace(
+										R.id.container,
 										BookDetailFragment
 												.newInstance(mBookList
 														.get(position)))
-								.commit();
+								.addToBackStack(null).commit();
 					}
 				});
 		return rootView;

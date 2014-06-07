@@ -7,7 +7,7 @@
 	android:orientation="vertical" >
 
 	<LinearLayout
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="5dp"
 		android:orientation="horizontal" >
@@ -27,7 +27,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_margin="5dp"
 		android:orientation="horizontal" >
@@ -47,17 +47,16 @@
 	</LinearLayout>
 
 	<TextView
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_margin="5dp"
-		android:text="@string/book_have_been_upload"
+		android:text="@string/book_has_been_publish"
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
 	<ListView
-		android:id="@+id/book_user_upload"
+		android:id="@+id/user_upload_book_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		tools:listitem="@layout/listitem_bookinfo" >
-	</ListView>
+		tools:listitem="@layout/listitem_bookinfo" />
 
 </LinearLayout>
