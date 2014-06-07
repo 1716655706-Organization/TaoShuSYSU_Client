@@ -126,6 +126,7 @@ public class BookListFragment extends Fragment implements
 
 			@Override
 			public void onGetBookListFail(String errorMessage) {
+				mSwipeRefreshLayout.setRefreshing(false);
 				Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -151,7 +152,6 @@ public class BookListFragment extends Fragment implements
 			int visibleItemCount, int totalItemCount) {
 		if (view.getLastVisiblePosition() == totalItemCount) {
 			handler.sendEmptyMessage(GET_OLDER_DATA);
-			Log.i("DATA", handler.toString());
 		}
 	}
 }

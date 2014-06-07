@@ -23,16 +23,18 @@ import com.sysu.taosysu.model.BookInfo;
 
 import android.os.AsyncTask;
 
-public class GetBookListByLabelAsyncTask extends AsyncTask<String, Integer, String> {
-	
+public class GetBookListByLabelAsyncTask extends
+		AsyncTask<String, Integer, String> {
+
 	private int serviceId = 1;
 	private int commandId = 5;
 	private String label;
 	private int startBookId;
 	private int size;
 	private OnRequestListener listener;
-	
-	public GetBookListByLabelAsyncTask(String label, int startBookId, int size, OnRequestListener listener) {
+
+	public GetBookListByLabelAsyncTask(String label, int startBookId, int size,
+			OnRequestListener listener) {
 		this.label = label;
 		this.startBookId = startBookId;
 		this.size = size;
@@ -69,7 +71,7 @@ public class GetBookListByLabelAsyncTask extends AsyncTask<String, Integer, Stri
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
@@ -110,6 +112,7 @@ public class GetBookListByLabelAsyncTask extends AsyncTask<String, Integer, Stri
 
 	public interface OnRequestListener {
 		void onGetBookListByLabelSuccess(List<Map<String, Object>> bookList);
+
 		void onGetBookListByLabelFail(String errorMessage);
 	}
 }

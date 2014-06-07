@@ -3,14 +3,11 @@ package com.sysu.taosysu.ui.fragment;
 import java.util.List;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +24,17 @@ import com.sysu.taosysu.model.BookInfo;
 import com.sysu.taosysu.model.Comment;
 import com.sysu.taosysu.network.GetCommentAsyncTask;
 import com.sysu.taosysu.network.GetLabelAsyncTask;
+import com.sysu.taosysu.network.AddCommentAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
+import com.sysu.taosysu.utils.PreferencesUtils;
 import com.sysu.taosysu.utils.StringUtils;
 
-public class BookDetailFragment extends Fragment {
+public class BookDetailFragment extends Fragment implements
+		GetCommentAsyncTask.OnRequestListener,
+		GetLabelAsyncTask.OnRequestListener,
+		AddCommentAsyncTask.OnRequestListener {
 
-	private static final int COMMENT = 1;
+	private int bookId;
 	private Context mContext;
 	private TextView mTitle;
 	private TextView mContent;
@@ -41,6 +43,7 @@ public class BookDetailFragment extends Fragment {
 	private LinearLayout commentContainer;
 	private List<String> labelList;
 	private List<Comment> commentList;
+	WaitingDialogFragment mProgressDialog = new WaitingDialogFragment();
 
 	LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
 			LayoutParams.MATCH_PARENT);
@@ -77,7 +80,7 @@ public class BookDetailFragment extends Fragment {
 		mContext = getActivity().getApplicationContext();
 
 		Bundle bundle = getArguments();
-		int bookId = bundle.getInt(BookInfo.BOOK_ID);
+		bookId = bundle.getInt(BookInfo.BOOK_ID);
 
 		View rootView = inflater.inflate(R.layout.fragment_book_detail,
 				container, false);
@@ -94,7 +97,7 @@ public class BookDetailFragment extends Fragment {
 		commentContainer = (LinearLayout) rootView
 				.findViewById(R.id.comment_container);
 
-		initData(bookId);
+		initData();
 		initShowContent(bundle);
 		initCommentAction();
 		return rootView;
@@ -113,32 +116,25 @@ public class BookDetailFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				mCommentBtn.setEnabled(StringUtils.isEmpty(mCommentEt));
+				mCommentBtn.setEnabled(!StringUtils.isEmpty(mCommentEt));
 			}
 		});
 		mCommentBtn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				String comment = mCommentEt.getText().toString();
+				getFragmentManager().beginTransaction()
+						.add(mProgressDialog, null).commit();
+				appendComment(mCommentEt.getText().toString());
 			}
 		});
 
 	}
 
-	@SuppressLint("HandlerLeak")
-	private Handler mHandler = new Handler() {
-		public void handleMessage(android.os.Message msg) {
-			switch (msg.what) {
-			case COMMENT:
-
-				break;
-
-			default:
-				break;
-			}
-		};
-	};
+	private void appendComment(String content) {
+		int userId = PreferencesUtils.getUserId(mContext);
+		NetworkRequest.addComment(bookId, userId, content, this);
+	}
 
 	private void initShowContent(Bundle bundle) {
 		mBookCover.setImageResource(BookInfo.DEFAULT_ICON);
@@ -146,41 +142,9 @@ public class BookDetailFragment extends Fragment {
 		mContent.setText(bundle.getString(BookInfo.BOOK_CONTENT));
 	}
 
-	private void initData(int bookId) {
-		NetworkRequest.getBookComment(bookId,
-				new GetCommentAsyncTask.OnRequestListener() {
-
-					@Override
-					public void onGetCommentSuccess(
-							List<Map<String, Object>> comments) {
-						commentList = Comment.parseList(comments);
-						initCommentContainer(commentList);
-						Log.v("DATA", StringUtils.parseLabelList(labelList));
-					}
-
-					@Override
-					public void onGetCommentFail(String errorMessage) {
-						Toast.makeText(mContext, errorMessage,
-								Toast.LENGTH_SHORT).show();
-					}
-				});
-		NetworkRequest.getBookLabel(bookId,
-				new GetLabelAsyncTask.OnRequestListener() {
-
-					@Override
-					public void onGetLabelSuccess(List<String> labels) {
-						labelList = labels;
-						mLabelContainer.setText(StringUtils
-								.parseLabelList(labelList));
-						mLabelContainer.invalidate();
-					}
-
-					@Override
-					public void onGetLabelFail(String errorMessage) {
-						Toast.makeText(mContext, errorMessage,
-								Toast.LENGTH_SHORT).show();
-					}
-				});
+	private void initData() {
+		NetworkRequest.getBookComment(bookId, this);
+		NetworkRequest.getBookLabel(bookId, this);
 	}
 
 	private void initCommentContainer(List<Comment> comments) {
@@ -189,9 +153,8 @@ public class BookDetailFragment extends Fragment {
 		TextView authorName;
 		TextView content;
 		TextView commentTime;
-
+		commentContainer.removeAllViews();
 		for (Comment c : comments) {
-			Log.i("NULL", inflater.toString());
 			View view = inflater.inflate(R.layout.item_comment, null);
 			authorName = (TextView) view
 					.findViewById(R.id.item_comment_author_name);
@@ -206,5 +169,45 @@ public class BookDetailFragment extends Fragment {
 
 		}
 		commentContainer.invalidate();
+	}
+
+	@Override
+	public void onAddCommentSuccess() {
+		mProgressDialog.dismiss();
+		mCommentEt.setText("");
+		NetworkRequest.getBookComment(bookId, this);
+	}
+
+	@Override
+	public void onAddCommentFail(String errorMessage) {
+		mProgressDialog.dismiss();
+		showErrorMessage(errorMessage);
+	}
+
+	@Override
+	public void onGetLabelSuccess(List<String> labels) {
+		labelList = labels;
+		mLabelContainer.setText(StringUtils.parseLabelList(labelList));
+		mLabelContainer.invalidate();
+	}
+
+	@Override
+	public void onGetLabelFail(String errorMessage) {
+		showErrorMessage(errorMessage);
+	}
+
+	@Override
+	public void onGetCommentSuccess(List<Map<String, Object>> comments) {
+		commentList = Comment.parseList(comments);
+		initCommentContainer(commentList);
+	}
+
+	@Override
+	public void onGetCommentFail(String errorMessage) {
+		showErrorMessage(errorMessage);
+	}
+
+	private void showErrorMessage(String errorMessage) {
+		Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT).show();
 	}
 }

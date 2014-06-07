@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,8 @@ import android.widget.Toast;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.model.BookInfo;
-import com.sysu.taosysu.network.GetBookListByLabelAsyncTask;
 import com.sysu.taosysu.network.GetBookListByBookNameAsyncTask;
+import com.sysu.taosysu.network.GetBookListByLabelAsyncTask;
 import com.sysu.taosysu.network.NetworkRequest;
 import com.sysu.taosysu.ui.adapter.BookListAdapter;
 import com.sysu.taosysu.utils.StringUtils;
@@ -46,6 +47,8 @@ public class SearchFragment extends Fragment implements
 	List<BookInfo> mBookList;
 	BookListAdapter adapter;
 
+	WaitingDialogFragment mProgressDialog = new WaitingDialogFragment();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -66,9 +69,11 @@ public class SearchFragment extends Fragment implements
 					int position, long id) {
 				getFragmentManager()
 						.beginTransaction()
-						.add(R.id.container,
+						.replace(
+								R.id.container,
 								BookDetailFragment.newInstance(mBookList
-										.get(position))).commit();
+										.get(position))).addToBackStack(null)
+						.commit();
 			}
 		});
 		initSearchAction();
@@ -103,9 +108,12 @@ public class SearchFragment extends Fragment implements
 	}
 
 	private void startSearch(String type, String content) {
-		if (type == LABEL_STRING) {
+		getFragmentManager().beginTransaction().add(mProgressDialog, null)
+				.commit();
+		Log.i("TYPE", type);
+		if (type.equals(LABEL_STRING)) {
 			NetworkRequest.getBookListByLabel(content, startBookId, size, this);
-		} else if (type == BOOK_STRING) {
+		} else if (type.equals(BOOK_STRING)) {
 			NetworkRequest.getBookListByBookName(content, startBookId, size,
 					this);
 		}
@@ -133,10 +141,12 @@ public class SearchFragment extends Fragment implements
 	}
 
 	private void showErrorToast(String errorMessage) {
+		mProgressDialog.dismiss();
 		Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
 	}
 
 	private void showBookList(List<Map<String, Object>> bookList) {
+		mProgressDialog.dismiss();
 		mBookList = BookInfo.parseList(bookList);
 		if (mBookList == null) {
 			mNoResultTv.setVisibility(View.VISIBLE);
