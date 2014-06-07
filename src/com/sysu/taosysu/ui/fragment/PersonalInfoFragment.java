@@ -23,12 +23,15 @@ import android.widget.Toast;
 
 public class PersonalInfoFragment extends Fragment implements OnRequestListener {
 
+	private static final int REQUIRE_SIZE = 20;
+	
 	TextView nameTv;
 	TextView timeTv;
 	ListView mBookListView;
 	List<BookInfo> mBookList;
 	BookListAdapter adapter;
-
+	int startId = -1;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 
 	private void initBookList() {
 		int userId = PreferencesUtils.getUserId(getActivity());
-		NetworkRequest.getBookListByUserId(userId, -1, 5, this);
+		NetworkRequest.getBookListByUserId(userId, startId, REQUIRE_SIZE, this);
 		Toast.makeText(getActivity(), "正在加载书籍信息", Toast.LENGTH_SHORT).show();
 	}
 
