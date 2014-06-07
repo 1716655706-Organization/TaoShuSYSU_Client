@@ -1,8 +1,7 @@
 package com.sysu.taosysu.ui.fragment;
 
-import android.app.Fragment;
+import android.preference.PreferenceFragment;
 
-
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends PreferenceFragment {
 
 }

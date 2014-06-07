@@ -161,7 +161,7 @@ public class BookDetailFragment extends Fragment implements
 			content = (TextView) view.findViewById(R.id.item_comment_content);
 			commentTime = (TextView) view.findViewById(R.id.item_comment_time);
 
-			authorName.setText(c.getAuthorName());
+			authorName.setText("评论人：" + c.getAuthorName());
 			content.setText(c.getContent());
 			commentTime.setText(c.getTime());
 

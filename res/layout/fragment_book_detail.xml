@@ -62,7 +62,8 @@
 				android:layout_alignLeft="@+id/book_img"
 				android:layout_alignRight="@+id/book_name"
 				android:layout_below="@+id/label"
-				android:layout_margin="5dp" >
+				android:layout_margin="5dp"
+				android:text="@string/loading" >
 			</TextView>
 
 			<TextView
@@ -83,6 +84,12 @@
 				android:layout_below="@+id/comment"
 				android:orientation="vertical" >
 			</LinearLayout>
+
+			<Space
+				android:id="@+id/empty"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/default_action_height"
+				android:layout_below="@+id/comment_container" />
 		</RelativeLayout>
 	</ScrollView>
 
@@ -90,7 +97,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/default_action_height"
 		android:layout_alignParentBottom="true"
-		android:layout_marginRight="10dp"
 		layout="@layout/action_comment" />
 
 </RelativeLayout>

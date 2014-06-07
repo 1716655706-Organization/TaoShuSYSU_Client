@@ -63,7 +63,8 @@ public class BookListAdapter extends BaseAdapter {
 		mBookCover = (ImageView) convertView.findViewById(R.id.list_bookimg);
 
 		mBookIdTv.setText(mData.get(position).getBookId().toString());
-		mBookNameTv.setText(mData.get(position).getBookName());
+		mBookNameTv.setText(StringUtils.getWrappedBookName(mData.get(position)
+				.getBookName()));
 		mBookContentTv.setText(StringUtils.getSimpleIntro(mData.get(position)
 				.getContent()));
 		mCreateTimeTv.setText(mData.get(position).getCreateTime());

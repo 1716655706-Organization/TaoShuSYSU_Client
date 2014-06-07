@@ -31,7 +31,7 @@
 		android:layout_marginRight="15dp"
 		android:layout_toRightOf="@+id/list_bookimg"
 		android:text="@string/default_book_name"
-		android:textAppearance="?android:attr/textAppearanceLarge" />
+		android:textSize="20sp" />
 
 	<TextView
 		android:id="@+id/list_book_content"
@@ -43,7 +43,7 @@
 		android:layout_below="@+id/list_book_name"
 		android:text="@string/default_book_introduce"
 		android:textColor="@color/text_gray"
-		android:textAppearance="?android:attr/textAppearanceMedium" />
+		android:textSize="17sp" />
 
 	<TextView
 		android:id="@+id/list_author_user"

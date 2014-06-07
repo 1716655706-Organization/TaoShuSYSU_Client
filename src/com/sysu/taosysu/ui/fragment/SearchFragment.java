@@ -7,7 +7,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +109,6 @@ public class SearchFragment extends Fragment implements
 	private void startSearch(String type, String content) {
 		getFragmentManager().beginTransaction().add(mProgressDialog, null)
 				.commit();
-		Log.i("TYPE", type);
 		if (type.equals(LABEL_STRING)) {
 			NetworkRequest.getBookListByLabel(content, startBookId, size, this);
 		} else if (type.equals(BOOK_STRING)) {
@@ -148,10 +146,12 @@ public class SearchFragment extends Fragment implements
 	private void showBookList(List<Map<String, Object>> bookList) {
 		mProgressDialog.dismiss();
 		mBookList = BookInfo.parseList(bookList);
-		if (mBookList == null) {
+		if (mBookList == null || mBookList.isEmpty()) {
 			mNoResultTv.setVisibility(View.VISIBLE);
+			mResultList.setVisibility(View.GONE);
 		} else {
 			mNoResultTv.setVisibility(View.GONE);
+			mResultList.setVisibility(View.VISIBLE);
 			adapter = new BookListAdapter(getActivity(), mBookList);
 			mResultList.setAdapter(adapter);
 			mResultList.invalidate();

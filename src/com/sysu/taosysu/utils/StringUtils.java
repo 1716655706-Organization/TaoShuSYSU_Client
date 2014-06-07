@@ -15,6 +15,7 @@ public class StringUtils {
 
 		StringBuilder sb = new StringBuilder();
 		if (labelList != null) {
+			sb.append("| ");
 			for (String label : labelList) {
 				sb.append(label).append(" | ");
 			}
@@ -28,11 +29,21 @@ public class StringUtils {
 			content = content.substring(0, 30);
 			content += "...";
 		}
-		return content;
+		return "简介：" + content;
 	}
 
 	public static String[] parseToStringArray(String labels) {
 		return labels.split(" ");
+	}
+
+	public static String getWrappedBookName(String bookName) {
+		if (bookName.length() > 10) {
+			bookName = bookName.substring(0, 10);
+			bookName = "书名：《" + bookName + "...";
+		} else {
+			bookName = "书名：《" + bookName + "》";
+		}
+		return bookName;
 	}
 
 }
