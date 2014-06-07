@@ -14,8 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -47,7 +47,7 @@ public class BookDetailFragment extends Fragment {
 	LayoutInflater inflater;
 
 	private EditText mCommentEt;
-	private ImageButton mCommentBtn;
+	private Button mCommentBtn;
 
 	public static BookDetailFragment newInstance(BookInfo book) {
 		BookDetailFragment tFragment = new BookDetailFragment();
@@ -63,6 +63,7 @@ public class BookDetailFragment extends Fragment {
 
 		return tFragment;
 	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,7 +88,7 @@ public class BookDetailFragment extends Fragment {
 		mLabelContainer = (TextView) rootView
 				.findViewById(R.id.label_container);
 
-		mCommentBtn = (ImageButton) rootView.findViewById(R.id.send_comment);
+		mCommentBtn = (Button) rootView.findViewById(R.id.send_comment);
 		mCommentEt = (EditText) rootView.findViewById(R.id.comment_content);
 
 		commentContainer = (LinearLayout) rootView
@@ -112,8 +113,7 @@ public class BookDetailFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				mCommentBtn.setEnabled(true);
-				mCommentBtn.setImageResource(R.id.send_comment);
+				mCommentBtn.setEnabled(StringUtils.isEmpty(mCommentEt));
 			}
 		});
 		mCommentBtn.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +191,7 @@ public class BookDetailFragment extends Fragment {
 		TextView commentTime;
 
 		for (Comment c : comments) {
-			Log.i("NULL", inflater.toString()); 
+			Log.i("NULL", inflater.toString());
 			View view = inflater.inflate(R.layout.item_comment, null);
 			authorName = (TextView) view
 					.findViewById(R.id.item_comment_author_name);

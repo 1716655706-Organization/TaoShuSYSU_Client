@@ -77,5 +77,6 @@
 	<string name="book_have_been_upload">已上传的书籍</string>
 	<string name="user_join_time_comma">加入时间：</string>
 	<string name="user_name_comma">用户名：</string>
+	<string name="no_match_result">无匹配结果</string>
 
 </resources>

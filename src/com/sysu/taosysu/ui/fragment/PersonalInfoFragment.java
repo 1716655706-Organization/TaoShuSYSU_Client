@@ -6,8 +6,10 @@ import java.util.Map;
 
 import com.sysu.taosysu.R;
 import com.sysu.taosysu.model.BookInfo;
+import com.sysu.taosysu.network.NetworkRequest;
 import com.sysu.taosysu.network.GetBookListByUserIdAsyncTask.OnRequestListener;
 import com.sysu.taosysu.ui.adapter.BookListAdapter;
+import com.sysu.taosysu.utils.PreferencesUtils;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -27,7 +29,6 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 	List<BookInfo> mBookList;
 	BookListAdapter adapter;
 
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -35,7 +36,9 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 
 		nameTv = (TextView) rootView.findViewById(R.id.user_name);
 		timeTv = (TextView) rootView.findViewById(R.id.user_join_time);
+		initBookList();
 		mBookListView = (ListView) rootView.findViewById(R.id.book_user_upload);
+
 		mBookListView
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -52,6 +55,12 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 					}
 				});
 		return rootView;
+	}
+
+	private void initBookList() {
+		int userId = PreferencesUtils.getUserId(getActivity());
+		NetworkRequest.getBookListByUserId(userId, -1, 5, this);
+		Toast.makeText(getActivity(), "正在加载书籍信息", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
