@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.sysu.taosysu.ui.fragment.BookListFragment;
 import com.sysu.taosysu.ui.fragment.NavigationDrawerFragment;
 import com.sysu.taosysu.ui.fragment.NotificationFragment;
+import com.sysu.taosysu.ui.fragment.PersonalInfoFragment;
 import com.sysu.taosysu.ui.fragment.PublishBookFragment;
 import com.sysu.taosysu.ui.fragment.QuitDialogFragment;
 import com.sysu.taosysu.ui.fragment.SearchFragment;
@@ -43,6 +44,9 @@ public class MainActivity extends Activity implements
 		Fragment mFragment = null;
 
 		switch (position) {
+		case NavigationDrawerFragment.POSITION_PERSONAL_INFO:
+			mFragment = new PersonalInfoFragment();
+			break;
 		case NavigationDrawerFragment.POSITION_HOME:
 			mFragment = new BookListFragment();
 			break;

@@ -23,6 +23,7 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 	EditText booknameEt;
 	EditText labelEt;
 	EditText descriptEt;
+	WaitingDialogFragment mProgressDialog = new WaitingDialogFragment();
 
 	Button confirmBtn;
 
@@ -74,6 +75,8 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 
 	@Override
 	public void onClick(View v) {
+		getFragmentManager().beginTransaction().add(mProgressDialog, null)
+				.commit();
 		int userId = PreferencesUtils.getUserId(getActivity());
 		String bookName = booknameEt.getText().toString();
 		String content = descriptEt.getText().toString();
@@ -85,6 +88,7 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 
 					@Override
 					public void onUploadBookSuccess() {
+						mProgressDialog.dismiss();
 						Toast.makeText(getActivity(), "上传成功",
 								Toast.LENGTH_SHORT).show();
 						clearAllContent();
@@ -92,6 +96,7 @@ public class PublishBookFragment extends Fragment implements TextWatcher,
 
 					@Override
 					public void onUploadBookFail(String errorMessage) {
+						mProgressDialog.dismiss();
 						Toast.makeText(getActivity(), errorMessage,
 								Toast.LENGTH_SHORT).show();
 					}
