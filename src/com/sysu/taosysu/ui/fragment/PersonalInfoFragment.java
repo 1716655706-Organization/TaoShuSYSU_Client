@@ -27,6 +27,7 @@ public class PersonalInfoFragment extends Fragment implements OnRequestListener 
 	List<BookInfo> mBookList;
 	BookListAdapter adapter;
 
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
